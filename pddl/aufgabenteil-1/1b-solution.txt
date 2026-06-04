@@ -1,0 +1,98 @@
+Domain parsed
+Problem parsed
+Grounding..
+Grounding Time: 19
+Aibr Preprocessing
+|F|:113
+|X|:0
+|A|:208
+|P|:0
+|E|:0
+H1 Setup Time (msec): 17
+Setting horizon to:NaN
+Running Greedy Best First Search
+h(n = s_0)=24.0
+ g(n)= 1.0 h(n)=23.0
+ g(n)= 2.0 h(n)=22.0
+ g(n)= 3.0 h(n)=21.0
+ g(n)= 4.0 h(n)=20.0
+ g(n)= 5.0 h(n)=19.0
+ g(n)= 6.0 h(n)=18.0
+ g(n)= 7.0 h(n)=17.0
+ g(n)= 8.0 h(n)=16.0
+ g(n)= 9.0 h(n)=15.0
+ g(n)= 10.0 h(n)=14.0
+ g(n)= 13.0 h(n)=12.0
+ g(n)= 15.0 h(n)=11.0
+ g(n)= 16.0 h(n)=10.0
+ g(n)= 17.0 h(n)=8.0
+ g(n)= 19.0 h(n)=7.0
+ g(n)= 20.0 h(n)=6.0
+ g(n)= 21.0 h(n)=4.0
+ g(n)= 23.0 h(n)=3.0
+ g(n)= 24.0 h(n)=2.0
+ g(n)= 25.0 h(n)=1.0
+ g(n)= 26.0 h(n)=0.0
+Problem Solved
+
+Found Plan:
+0.0: (load-truck spandau warehouse1 parcel8 truck2)
+1.0: (load-truck spandau warehouse1 parcel7 truck2)
+2.0: (load-truck spandau warehouse1 parcel4 truck2)
+3.0: (load-truck spandau warehouse1 parcel2 truck2)
+4.0: (load-truck spandau warehouse1 parcel3 truck2)
+5.0: (load-truck spandau warehouse1 parcel6 truck2)
+6.0: (load-truck spandau warehouse1 parcel5 truck2)
+7.0: (load-truck spandau warehouse1 parcel1 truck1)
+8.0: (drive-to-location spandau lichtenberg warehouse1 warehouse2 truck1 meyer)
+9.0: (unload-truck lichtenberg warehouse2 parcel1 truck1)
+10.0: (drive-to-location spandau neukoelln warehouse1 warehouse5 truck2 berger)
+11.0: (unload-truck neukoelln warehouse5 parcel2 truck2)
+12.0: (drive-to-location neukoelln spandau warehouse5 warehouse1 truck2 berger)
+13.0: (drive-to-location spandau lichtenberg warehouse1 warehouse2 truck2 schmitz)
+14.0: (unload-truck lichtenberg warehouse2 parcel5 truck2)
+15.0: (unload-truck lichtenberg warehouse2 parcel4 truck2)
+16.0: (drive-to-location lichtenberg spandau warehouse2 warehouse1 truck2 schmitz)
+17.0: (drive-to-location spandau neukoelln warehouse1 warehouse4 truck2 schmitz)
+18.0: (unload-truck neukoelln warehouse4 parcel6 truck2)
+19.0: (unload-truck neukoelln warehouse4 parcel8 truck2)
+20.0: (drive-to-location neukoelln spandau warehouse4 warehouse1 truck2 schmitz)
+21.0: (drive-to-location spandau pankow warehouse1 warehouse3 truck2 berger)
+22.0: (unload-truck pankow warehouse3 parcel7 truck2)
+23.0: (drive-to-location pankow spandau warehouse3 warehouse1 truck2 berger)
+24.0: (drive-to-location spandau lichtenberg warehouse1 warehouse2 truck2 schmitz)
+25.0: (unload-truck lichtenberg warehouse2 parcel3 truck2)
+
+Plan-Length:26
+Metric (Search):26.0
+Planning Time (msec): 354
+Heuristic Time (msec): 79
+Search Time (msec): 115
+Expanded Nodes:43
+States Evaluated:748
+Fixed constraint violations during search (zero-crossing):0
+Number of Dead-Ends detected:0
+Number of Duplicates detected:69
+Planner found 1 plan(s) in 0.478secs.
+
+---
+
+The plan in plain words:
+1. Parcel 1 is loaded into truck 1 and Parcel 2 through 8 are loaded into truck 2 at warehouse 1.
+2. Meyer drives truck 1 to warehouse 2, where the one parcel 1 is unloaded.
+3. Berger drives truck 2 to warehouse 5, unloads parcel 2 there, and returns to warehouse 1.
+4. Berger switches with Schmitz, and Schmitz drives truck 2 to warehouse 2. 
+5. There, parcel 4 and 5 are unloaded, and Schmitz drives truck 2 back to warehouse 1.
+6. From there, Schmitz drives truck 2 to warehouse 4 to unload parcel 6 and 8, and returns to warehouse 1.
+7. Schmitz switches with Berger, who drives truck 2 to warehouse 3 to unload parcel 7 there.
+8. Berger then drives back to warehouse 1 to switch with Schmitz again.
+9. Schmitz now unloads the last parcel 3 at warehouse 2.
+
+---
+
+Differences to the plan from 1a:
+- Truck 1 and 2 usage are relatively balanced for plan 1a. However, this plan almost exclusively uses truck 2. Truck 1 drives and unloads only once.
+- The domain and problem files have been expanded for exercise 1b to support parcel-location goals, with the planner now being able to pick the target warehouse in a location themselves. 
+A natural consequence of that is the fact that in Neukölln, parcel 2, 6 and 8 are now distributed among warehouse 4 and 5. So, warehouse 5 saw its first activity in plan 1b.
+- In plan 1a, the highest amount of trips to the same location was 2. Plan 1b introduced a new record with 3 for Lichtenberg (for parcel 1, 3, 4 and 5  ).
+- Plan 1b expanded more nodes (43 vs. 28), evaluated more states (748 vs. 471) and takes more steps (26 vs. 24) than plan 1a, due to the added parcel-at-location predicate.

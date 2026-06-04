@@ -1,0 +1,104 @@
+Domain parsed
+Problem parsed
+Grounding..
+Grounding Time: 35
+Aibr Preprocessing
+|F|:126
+|X|:3
+|A|:312
+|P|:0
+|E|:0
+H1 Setup Time (msec): 14
+Setting horizon to:NaN
+Running Greedy Best First Search
+h(n = s_0)=1200.0
+ g(n)= 14690.0 h(n)=1050.0
+ g(n)= 29415.0 h(n)=900.0
+ g(n)= 58865.0 h(n)=750.0
+ g(n)= 88245.0 h(n)=600.0
+ g(n)= 117695.0 h(n)=450.0
+ g(n)= 117995.0 h(n)=300.0
+ g(n)= 147445.0 h(n)=150.0
+ g(n)= 147595.0 h(n)=0.0
+Problem Solved
+
+Found Plan:
+0.0: (load-truck spandau warehouse1 parcel8 truck2)
+1.0: (drive-to-location spandau neukoelln warehouse1 warehouse5 truck2 berger)
+2.0: (load-truck spandau warehouse1 parcel7 truck1)
+3.0: (drive-to-location spandau pankow warehouse1 warehouse3 truck1 schmitz)
+4.0: (load-truck spandau warehouse1 parcel2 truck3)
+5.0: (load-truck spandau warehouse1 parcel1 truck3)
+6.0: (unload-truck neukoelln warehouse5 parcel8 truck2)
+7.0: (unload-truck pankow warehouse3 parcel7 truck1)
+8.0: (drive-to-location pankow spandau warehouse3 warehouse1 truck1 schmitz)
+9.0: (load-truck spandau warehouse1 parcel4 truck1)
+10.0: (drive-to-location spandau lichtenberg warehouse1 warehouse2 truck1 schmitz)
+11.0: (drive-to-location neukoelln spandau warehouse5 warehouse1 truck2 berger)
+12.0: (load-truck spandau warehouse1 parcel3 truck2)
+13.0: (drive-to-location spandau lichtenberg warehouse1 warehouse2 truck2 berger)
+14.0: (unload-truck lichtenberg warehouse2 parcel4 truck1)
+15.0: (drive-to-location lichtenberg spandau warehouse2 warehouse1 truck1 schmitz)
+16.0: (load-truck lichtenberg warehouse2 parcel4 truck2)
+17.0: (load-truck spandau warehouse1 parcel6 truck1)
+18.0: (drive-to-location spandau neukoelln warehouse1 warehouse5 truck1 meyer)
+19.0: (load-truck spandau warehouse1 parcel5 truck3)
+20.0: (drive-to-location spandau lichtenberg warehouse1 warehouse2 truck3 schmitz)
+21.0: (unload-truck lichtenberg warehouse2 parcel1 truck3)
+22.0: (drive-to-location lichtenberg spandau warehouse2 warehouse1 truck3 schmitz)
+23.0: (unload-truck spandau warehouse1 parcel5 truck3)
+24.0: (unload-truck lichtenberg warehouse2 parcel4 truck2)
+25.0: (unload-truck neukoelln warehouse5 parcel6 truck1)
+26.0: (drive-to-location neukoelln spandau warehouse5 warehouse1 truck1 meyer)
+27.0: (load-truck spandau warehouse1 parcel5 truck1)
+28.0: (drive-to-location spandau lichtenberg warehouse1 warehouse2 truck1 schmitz)
+29.0: (drive-to-location spandau neukoelln warehouse1 warehouse4 truck3 meyer)
+30.0: (unload-truck neukoelln warehouse4 parcel2 truck3)
+31.0: (unload-truck lichtenberg warehouse2 parcel5 truck1)
+32.0: (unload-truck lichtenberg warehouse2 parcel3 truck2)
+
+Plan-Length:33
+Metric (Search):147595.0
+Planning Time (msec): 650
+Heuristic Time (msec): 276
+Search Time (msec): 344
+Expanded Nodes:615
+States Evaluated:5399
+Fixed constraint violations during search (zero-crossing):0
+Number of Dead-Ends detected:0
+Number of Duplicates detected:3488
+Planner found 1 plan(s) in 0.834secs.
+
+---
+
+The plan in plain words:
+
+1. Parcel 8 is loaded into truck 2 at warehouse 1, and Berger drives it to warehouse 5. 
+2. Parcel 7 is loaded into truck 1 at warehouse 1, and Schmitz drives it to warehouse 3. 
+3. Parcel 1 and 2 are loaded into truck 3 at warehouse 1.
+4. Berger unloads parcel 8 at warehouse 5.
+5. Schmitz unloads parcel 7 at warehouse 3 and drives truck 1 back to warehouse 1.
+6. There, parcel 4 is loaded into truck 1, and Schmitz drives it to warehouse 2.
+7. Berger returns to warehouse 1, loads parcel 3 and drives truck 2 to warehouse 2 as well.
+8. Schmitz unloads parcel 4 at warehouse 2, and drives truck 1 back to warehouse 1.
+9. Berger loads the parcel 4 on truck 2 that was just unloaded at warehouse 2.
+10. Schmitz loads parcel 6 on truck 1 at warehouse 1, switches with Meyer, and Meyer drives truck 1 to warehouse 5.
+11. Schmitz then loads parcel 5 on truck 3 at warehouse 1, drives to warehouse 2, unloads parcel 1, returns to warehouse 1 and unloads the parcel 5 that was just loaded.
+12. Berger now unloads parcel 4 at warehouse 2 as intended.
+13. Meyer unloads parcel 6 at warehouse 5, drives truck 1 back to warehouse 1, and loads parcel 5 that Schmitz just unloaded.
+14. Schmitz switches with Meyer and drives truck 1 to warehouse 2.
+15. Meyer takes the truck 3 that Schmitz left behind and drives it to warehouse 4.
+16. Meyer unloads parcel 2 at warehouse 4.
+17. Schmitz unloads parcel 5 at warehouse 2.
+18. Berger unloads parcel 3 at warehouse 2.
+
+---
+
+Key observations:
+- There are now cases where parcels are loaded and unloaded multiple times without any benefit, compared to the plan 1a and 1b.
+- The three trucks' usage is roughly balanced, despite the explicitly defined metric to minimize wear. In the expected plan, truck 3 would dominate. 
+- Plan 1c expanded more nodes (615 vs. 43), evaluated more states (5399 vs. 748) and takes more steps (33 vs. 26) than plan 1b. It performs significantly worse than Plan 1a and 1b. 
+
+This can be explained by the fact that Greedy Best First Search's only aim is to minimize the heuristic value h(n). 
+It does so successfully, but at the cost of neglecting the total cost (total-wear) g(n). 
+To make tracking the kilometer counts worth it and have total wear minimization have an impact on the plan, a different search algorithm needs to be chosen.
