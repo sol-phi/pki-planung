@@ -1,21 +1,24 @@
-package org.acme.schooltimetabling.domain;
+package org.acme.maintenancescheduling.domain;
+
+import java.util.Objects;
 
 import ai.timefold.solver.core.api.domain.common.PlanningId;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
-@JsonIdentityInfo(scope = Room.class, generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-public class Room {
+public class Crew {
 
     @PlanningId
     private String id;
 
     private String name;
 
-    public Room() {
+    public Crew() {
     }
 
-    public Room(String id, String name) {
+    public Crew(String name) {
+        this.name = name;
+    }
+
+    public Crew(String id, String name) {
         this.id = id;
         this.name = name;
     }
@@ -35,5 +38,21 @@ public class Room {
 
     public String getName() {
         return name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Crew crew)) {
+            return false;
+        }
+        return Objects.equals(getId(), crew.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return getId().hashCode();
     }
 }
