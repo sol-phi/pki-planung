@@ -1,0 +1,62 @@
+Planning service: https://solver.planning.domains:5001/package/enhsp/solve
+Domain: vhs-scheduling-1c, Problem: schedule-vhs-courses-1c
+
+Plan found:
+0.00000: (schedule-course eiche edv_02 room_03 slot_mon_am mon)
+1.00000: (schedule-course kiefer tonformen room_04 slot_tue_pm tue)
+2.00000: (schedule-course kiefer tonformen room_03 slot_mon_pm mon)
+3.00000: (schedule-course ahorn edv_01 room_04 slot_wed_am wed)
+4.00000: (schedule-course ahorn edv_01 room_03 slot_tue_am tue)
+5.00000: (schedule-course ahorn edv_02 room_04 slot_mon_pm mon)
+6.00000: (schedule-course ahorn edv_01 room_02 slot_mon_am mon)
+7.00000: (schedule-course birke webdesign room_04 slot_thu_am thu)
+8.00000: (schedule-course birke webdesign room_03 slot_wed_am wed)
+9.00000: (schedule-course birke webdesign room_02 slot_tue_am tue)
+10.00000: (schedule-course birke webdesign room_01 slot_mon_am mon)
+11.00000: (schedule-course eiche edv_02 room_04 slot_wed_pm wed)
+12.00000: (schedule-course eiche edv_02 room_03 slot_tue_pm tue)
+13.00000: (schedule-course kiefer malerei room_04 slot_thu_pm thu)
+14.00000: (schedule-course kiefer malerei room_03 slot_wed_pm wed)
+15.00000: (schedule-course kiefer malerei room_04 slot_fri_pm fri)
+16.00000: (schedule-course eiche edv_02 room_03 slot_thu_pm thu)
+17.00000: (schedule-course ahorn edv_01 room_04 slot_fri_am fri)
+18.00000: (schedule-course ahorn edv_01 room_03 slot_thu_am thu)
+19.00000: (schedule-course eiche edv_02 room_01 slot_tue_am tue)
+20.00000: (schedule-course ahorn edv_01 room_02 slot_tue_pm tue)
+Metric: 20
+Makespan: 20
+States evaluated: undefined
+Planner found 1 plan(s) in 4.438secs.
+
+
+---
+
+Remarks on the plan:
+
+- Subtask C extends the model from B by introducing part-time constraints.
+  To achieve this, two new static predicates were introduced: (morning-only ?t) and (afternoon-only ?t). 
+- In the problem initialization (init), these were defined for the affected teachers: (morning-only birke) and (afternoon-only kiefer). 
+- Additionally, all morning slots were marked with (is-morning-slot ?s).
+- Two new preconditions were added to the schedule-course action:
+  (not (and (morning-only ?t) (not (is-morning-slot ?s)))) prevents a morning teacher from being scheduled in an afternoon slot.
+  (not (and (afternoon-only ?t) (is-morning-slot ?s))) prevents the reverse case.
+- All capacity limits are fully exhausted: the maximum of 21 courses is completely reached.
+
+
+┌──────┬──────────────────┬──────────────────┬──────────────────┬──────────────────┬──────────────────┐
+│ Slot │ Montag           │ Dienstag         │ Mittwoch         │ Donnerstag       │ Freitag          │
+├──────┼──────────────────┼──────────────────┼──────────────────┼──────────────────┼──────────────────┤
+│ AM   │ Birke: Webdesign │ Eiche: EDV_02    │ Birke: Webdesign │ Ahorn: EDV_01    │ Ahorn: EDV_01    │
+│      │ [Raum 01]        │ [Raum 01]        │ [Raum 03]        │ [Raum 03]        │ [Raum 04]        │
+│      │ Ahorn: EDV_01    │ Birke: Webdesign │ Ahorn: EDV_01    │ Birke: Webdesign │                  │
+│      │ [Raum 02]        │ [Raum 02]        │ [Raum 04]        │ [Raum 04]        │                  │
+│      │ Eiche: EDV_02    │ Ahorn: EDV_01    │                  │                  │                  │
+│      │ [Raum 03]        │ [Raum 03]        │                  │                  │                  │
+├──────┼──────────────────┼──────────────────┼──────────────────┼──────────────────┼──────────────────┤
+│ PM   │ Kiefer: Tonformen│ Ahorn: EDV_01    │ Kiefer: Malerei  │ Eiche: EDV_02    │ Kiefer: Malerei  │
+│      │ [Raum 03]        │ [Raum 02]        │ [Raum 03]        │ [Raum 03]        │ [Raum 04]        │
+│      │ Ahorn: EDV_02    │ Eiche: EDV_02    │ Eiche: EDV_02    │ Kiefer: Malerei  │                  │
+│      │ [Raum 04]        │ [Raum 03]        │ [Raum 04]        │ [Raum 04]        │                  │
+│      │                  │ Kiefer: Tonformen│                  │                  │                  │
+│      │                  │ [Raum 04]        │                  │                  │                  │
+└──────┴──────────────────┴──────────────────┴──────────────────┴──────────────────┴──────────────────┘

@@ -1,0 +1,96 @@
+Planning service: https://solver.planning.domains:5001/package/dual-bfws-ffparser/solve
+Domain: vhs-scheduling-1a, Problem: schedule-vhs-courses-1a
+ --- OK.
+ Match tree built with 320 nodes.
+
+PDDL problem description loaded: 
+	Domain: VHS-SCHEDULING-1A
+	Problem: SCHEDULE-VHS-COURSES-1A
+	#Actions: 320
+	#Fluents: 170
+Goals found: 5
+Goals_Edges found: 5
+Starting search with 1-BFWS...
+--[5 / 0]--
+--[4 / 0]--
+--[4 / 3]--
+--[3 / 0]--
+--[3 / 3]--
+--[2 / 0]--
+--[2 / 3]--
+--[1 / 0]--
+--[1 / 3]--
+--[0 / 0]--
+--[0 / 3]--
+Total time: 0.001182
+Nodes generated during search: 317
+Nodes expanded during search: 5
+Plan found with cost: 5
+Fast-BFS search completed in 0.001182 secs
+
+
+Plan found:
+0.00000: (SCHEDULE-COURSE AHORN EDV_02 ROOM_04 SLOT_FRI_PM)
+0.00100: (SCHEDULE-COURSE EICHE WEBDESIGN ROOM_03 SLOT_FRI_PM)
+0.00200: (SCHEDULE-COURSE BIRKE MALEREI ROOM_02 SLOT_FRI_PM)
+0.00300: (SCHEDULE-COURSE AHORN EDV_01 ROOM_04 SLOT_FRI_AM)
+0.00400: (SCHEDULE-COURSE KIEFER TONFORMEN ROOM_01 SLOT_FRI_PM)
+Metric: 0.004
+Makespan: 0.004
+States evaluated: undefined
+Planner found 1 plan(s) in 2.965secs.
+
+┌──────┬──────────────────┬──────────────────┬──────────────────┬──────────────────┬──────────────────┐
+│ Slot │ Montag           │ Dienstag         │ Mittwoch         │ Donnerstag       │ Freitag          │
+├──────┼──────────────────┼──────────────────┼──────────────────┼──────────────────┼──────────────────┤
+│ AM   │                  │                  │                  │                  │ Ahorn: EDV_01    │
+│      │                  │                  │                  │                  │ [Raum 04]        │
+├──────┼──────────────────┼──────────────────┼──────────────────┼──────────────────┼──────────────────┤
+│ PM   │                  │                  │                  │                  │ Ahorn: EDV_02    │
+│      │                  │                  │                  │                  │ [Raum 04]        │
+│      │                  │                  │                  │                  │ Eiche: Webdesign │
+│      │                  │                  │                  │                  │ [Raum 03]        │
+│      │                  │                  │                  │                  │ Birke: Malerei   │
+│      │                  │                  │                  │                  │ [Raum 02]        │
+│      │                  │                  │                  │                  │ Kiefer: Tonformen│
+│      │                  │                  │                  │                  │ [Raum 01]        │
+└──────┴──────────────────┴──────────────────┴──────────────────┴──────────────────┴──────────────────┘
+
+---
+
+other possible plan with LAMA-first
+Plan found:
+0.00000: (schedule-course ahorn edv_01 room_01 slot_fri_am)
+0.00100: (schedule-course eiche edv_02 room_04 slot_wed_pm)
+0.00200: (schedule-course birke webdesign room_02 slot_wed_pm)
+0.00300: (schedule-course kiefer tonformen room_03 slot_wed_pm)
+0.00400: (schedule-course kiefer malerei room_04 slot_wed_am)
+
+┌──────┬──────────────────┬──────────────────┬──────────────────┬──────────────────┬──────────────────┐
+│ Slot │ Montag           │ Dienstag         │ Mittwoch         │ Donnerstag       │ Freitag          │
+├──────┼──────────────────┼──────────────────┼──────────────────┼──────────────────┼──────────────────┤
+│ AM   │                  │                  │ Kiefer: Malerei  │                  │ Ahorn: EDV_01    │
+│      │                  │                  │ [Raum 04]        │                  │ [Raum 01]        │
+├──────┼──────────────────┼──────────────────┼──────────────────┼──────────────────┼──────────────────┤
+│ PM   │                  │                  │ Eiche: EDV_02    │                  │                  │
+│      │                  │                  │ [Raum 04]        │                  │                  │
+│      │                  │                  │ Birke: Webdesign │                  │                  │
+│      │                  │                  │ [Raum 02]        │                  │                  │
+│      │                  │                  │ Kiefer: Tonformen│                  │                  │
+│      │                  │                  │ [Raum 03]        │                  │                  │
+└──────┴──────────────────┴──────────────────┴──────────────────┴──────────────────┴──────────────────┘
+---
+
+Remarks on the plan:
+
+- All constraints are satisfied: every teacher only teaches courses they are
+  qualified for, no teacher is assigned to two courses in the same slot, and no
+  room is double-booked.
+- All five courses appear exactly once in the schedule.
+- The planner concentrates all courses on one day (BFWS FF Parser). This is technically valid but
+  unrealistic for a real weekly schedule. The model does not constrain how
+  courses are distributed across the week, so the planner finds the shortest
+  path to the goal without considering balance.
+- A more realistic distribution could be enforced by adding constraints such as
+  a maximum number of courses per day per teacher, or by splitting the goal
+  across specific days. This is however not required by part A of the task.
