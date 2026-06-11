@@ -1,36 +1,39 @@
 package org.acme.schooltimetabling.domain;
 
-import org.optaplanner.core.api.domain.entity.PlanningEntity;
-import org.optaplanner.core.api.domain.lookup.PlanningId;
-import org.optaplanner.core.api.domain.variable.PlanningVariable;
+import ai.timefold.solver.core.api.domain.entity.PlanningEntity;
+import ai.timefold.solver.core.api.domain.common.PlanningId;
+import ai.timefold.solver.core.api.domain.variable.PlanningVariable;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 
 @PlanningEntity
 public class Lesson {
 
     @PlanningId
-    private Long id;
+    private String id;
 
     private String subject;
     private String teacher;
     private String studentGroup;
 
+    @JsonIdentityReference
     @PlanningVariable
     private Timeslot timeslot;
+
+    @JsonIdentityReference
     @PlanningVariable
     private Room room;
 
-    // No-arg constructor required for OptaPlanner
     public Lesson() {
     }
 
-    public Lesson(long id, String subject, String teacher, String studentGroup) {
+    public Lesson(String id, String subject, String teacher, String studentGroup) {
         this.id = id;
         this.subject = subject;
         this.teacher = teacher;
         this.studentGroup = studentGroup;
     }
 
-    public Lesson(long id, String subject, String teacher, String studentGroup, Timeslot timeslot, Room room) {
+    public Lesson(String id, String subject, String teacher, String studentGroup, Timeslot timeslot, Room room) {
         this(id, subject, teacher, studentGroup);
         this.timeslot = timeslot;
         this.room = room;
@@ -45,7 +48,7 @@ public class Lesson {
     // Getters and setters
     // ************************************************************************
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
@@ -76,5 +79,4 @@ public class Lesson {
     public void setRoom(Room room) {
         this.room = room;
     }
-
 }
