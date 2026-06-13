@@ -1,6 +1,6 @@
-(define (domain vhs-scheduling-1b)
+(define (domain vhs-scheduling-2b)
 
-  (:requirements :strips :typing :numeric-fluents)
+  (:requirements :strips :typing :numeric-fluents :negative-preconditions)
 
   (:types
     teacher
@@ -20,7 +20,6 @@
 
   (:functions
     (remaining-capacity ?t - teacher)
-    (daily-courses ?t - teacher ?d - day)
     (total-courses-scheduled)
   )
 
@@ -33,14 +32,12 @@
       (not (course-scheduled ?c ?s))
       (slot-on-day ?s ?d)
       (> (remaining-capacity ?t) 0)
-      (< (daily-courses ?t ?d) 2)
     )
     :effect (and
       (course-scheduled ?c ?s)
       (teacher-busy ?t ?s)
       (room-busy ?r ?s)
       (decrease (remaining-capacity ?t) 1)
-      (increase (daily-courses ?t ?d) 1)
       (increase (total-courses-scheduled) 1)
     )
   )

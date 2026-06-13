@@ -1,11 +1,11 @@
 Planning service: https://solver.planning.domains:5001/package/dual-bfws-ffparser/solve
-Domain: vhs-scheduling-1a, Problem: schedule-vhs-courses-1a
+Domain: vhs-scheduling-2a, Problem: schedule-vhs-courses-2a
  --- OK.
  Match tree built with 320 nodes.
 
 PDDL problem description loaded: 
-	Domain: VHS-SCHEDULING-1A
-	Problem: SCHEDULE-VHS-COURSES-1A
+	Domain: VHS-SCHEDULING-2A
+	Problem: SCHEDULE-VHS-COURSES-2A
 	#Actions: 320
 	#Fluents: 170
 Goals found: 5

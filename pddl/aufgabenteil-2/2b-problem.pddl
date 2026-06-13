@@ -1,5 +1,5 @@
-(define (problem schedule-vhs-courses-1c)
-  (:domain vhs-scheduling-1c)
+(define (problem schedule-vhs-courses-2b)
+  (:domain vhs-scheduling-2b)
 
   (:objects
     ahorn eiche birke kiefer - teacher
@@ -23,13 +23,6 @@
     (can-teach kiefer malerei)
     (can-teach kiefer tonformen)
 
-    (morning-only birke)
-    (afternoon-only kiefer)
-
-    (is-morning-slot slot_mon_am) (is-morning-slot slot_tue_am)
-    (is-morning-slot slot_wed_am) (is-morning-slot slot_thu_am)
-    (is-morning-slot slot_fri_am)
-
     (slot-on-day slot_mon_am mon) (slot-on-day slot_mon_pm mon)
     (slot-on-day slot_tue_am tue) (slot-on-day slot_tue_pm tue)
     (slot-on-day slot_wed_am wed) (slot-on-day slot_wed_pm wed)
@@ -41,28 +34,10 @@
     (= (remaining-capacity birke) 4)
     (= (remaining-capacity kiefer) 5)
 
-    (= (daily-courses ahorn mon) 0) (= (daily-courses ahorn tue) 0)
-    (= (daily-courses ahorn wed) 0) (= (daily-courses ahorn thu) 0)
-    (= (daily-courses ahorn fri) 0)
-
-    (= (daily-courses eiche mon) 0) (= (daily-courses eiche tue) 0)
-    (= (daily-courses eiche wed) 0) (= (daily-courses eiche thu) 0)
-    (= (daily-courses eiche fri) 0)
-
-    (= (daily-courses birke mon) 0) (= (daily-courses birke tue) 0)
-    (= (daily-courses birke wed) 0) (= (daily-courses birke thu) 0)
-    (= (daily-courses birke fri) 0)
-
-    (= (daily-courses kiefer mon) 0) (= (daily-courses kiefer tue) 0)
-    (= (daily-courses kiefer wed) 0) (= (daily-courses kiefer thu) 0)
-    (= (daily-courses kiefer fri) 0)
-
     (= (total-courses-scheduled) 0)
   )
 
   (:goal
     (= (total-courses-scheduled) 21)
   )
-
-  (:metric maximize (total-courses-scheduled))
 )

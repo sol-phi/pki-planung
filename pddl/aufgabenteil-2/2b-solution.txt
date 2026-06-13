@@ -1,5 +1,5 @@
 Planning service: https://solver.planning.domains:5001/package/enhsp/solve
-Domain: vhs-scheduling-1b, Problem: schedule-vhs-courses-1b
+Domain: vhs-scheduling-2b, Problem: schedule-vhs-courses-2b
 
 Plan found:
 0.00000: (schedule-course eiche webdesign room_01 slot_tue_pm tue)

@@ -1,5 +1,5 @@
-(define (problem schedule-vhs-courses-1a)
-  (:domain vhs-scheduling-1a)
+(define (problem schedule-vhs-courses-2a)
+  (:domain vhs-scheduling-2a)
 
   (:objects
     ahorn eiche birke kiefer - teacher

@@ -1,6 +1,6 @@
-(define (domain vhs-scheduling-1a)
+(define (domain vhs-scheduling-2a)
 
-  (:requirements :strips :typing)
+  (:requirements :strips :typing :negative-preconditions)
 
   (:types
     teacher
