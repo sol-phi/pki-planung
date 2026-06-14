@@ -38,6 +38,15 @@
   )
 
   (:goal
-    (= (total-courses-scheduled) 21)
+    (and
+      (exists (?s - slot) (course-scheduled edv_01 ?s))
+      (exists (?s - slot) (course-scheduled edv_02 ?s))
+      (exists (?s - slot) (course-scheduled webdesign ?s))
+      (exists (?s - slot) (course-scheduled malerei ?s))
+      (exists (?s - slot) (course-scheduled tonformen ?s))
+      (<= (total-courses-scheduled) 21)
+    )
   )
+
+  (:metric maximize (total-courses-scheduled))
 )
