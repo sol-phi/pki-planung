@@ -71,11 +71,11 @@ public class TimetableDemoResource {
 
         List<Subject> subjects = new ArrayList<>();
         long nextSubjectId = 0L;
-        subjects.add(new Subject(Long.toString(nextSubjectId++),"EDV_01",  123));
-        subjects.add(new Subject(Long.toString(nextSubjectId++),"EDV_02",  50));
-        subjects.add(new Subject(Long.toString(nextSubjectId++),"Webdesign",  84));
-        subjects.add(new Subject(Long.toString(nextSubjectId++),"Malerei", 105));
-        subjects.add(new Subject(Long.toString(nextSubjectId++),"Tonformen", 39));
+        subjects.add(new Subject(Long.toString(nextSubjectId++),"EDV_01",  123, 20));
+        subjects.add(new Subject(Long.toString(nextSubjectId++),"EDV_02",  50, 30));
+        subjects.add(new Subject(Long.toString(nextSubjectId++),"Webdesign",  84, 25));
+        subjects.add(new Subject(Long.toString(nextSubjectId++),"Malerei", 105, 30));
+        subjects.add(new Subject(Long.toString(nextSubjectId++),"Tonformen", 39, 50));
 
         List<Teacher> teachers = new ArrayList<>();
         long nextTeacherId = 0L;

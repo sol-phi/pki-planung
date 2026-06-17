@@ -12,14 +12,16 @@ public class Subject {
 
     private String name;
     private int demand;
+    private int entryFee;
 
     public Subject() {
     }
 
-    public Subject(String id, String name, int demand) {
+    public Subject(String id, String name, int demand, int entryFee) {
         this.id = id;
         this.name = name;
         this.demand = demand;
+        this.entryFee = entryFee;
     }
 
     @Override
@@ -41,5 +43,9 @@ public class Subject {
 
     public int getDemand() {
         return demand;
+    }
+
+    public int getEntryFee() {
+        return entryFee;
     }
 }
