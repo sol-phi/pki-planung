@@ -1,0 +1,115 @@
+=============================================================================================================================
+
+maximizeScheduledLessons
++---------------------------+-----------------------+-----------------------+-----------------------+-----------------------+
+| Timeslot                  | Raum01                | Raum02                | Raum03                | Raum04                |
++---------------------------+-----------------------+-----------------------+-----------------------+-----------------------+
+| Monday 08:00 - 12:00      | Malerei               | EDV_01                | EDV_02                | *Empty*               |
+|                           | by Birke              | by Ahorn              | by Eiche              |                       |
+|                           | all students          | all students          | all students          |                       |
++---------------------------+-----------------------+-----------------------+-----------------------+-----------------------+
+| Monday 13:00 - 17:00      | Malerei               | EDV_01                | *Empty*               | *Empty*               |
+|                           | by Kiefer             | by Ahorn              |                       |                       |
+|                           | all students          | all students          |                       |                       |
++---------------------------+-----------------------+-----------------------+-----------------------+-----------------------+
+| Tuesday 08:00 - 12:00     | Webdesign             | Webdesign             | *Empty*               | *Empty*               |
+|                           | by Birke              | by Eiche              |                       |                       |
+|                           | all students          | all students          |                       |                       |
++---------------------------+-----------------------+-----------------------+-----------------------+-----------------------+
+| Tuesday 13:00 - 17:00     | Tonformen             | EDV_01                | *Empty*               | *Empty*               |
+|                           | by Kiefer             | by Ahorn              |                       |                       |
+|                           | all students          | all students          |                       |                       |
++---------------------------+-----------------------+-----------------------+-----------------------+-----------------------+
+| Wednesday 08:00 - 12:00   | Malerei               | EDV_02                | *Empty*               | *Empty*               |
+|                           | by Birke              | by Ahorn              |                       |                       |
+|                           | all students          | all students          |                       |                       |
++---------------------------+-----------------------+-----------------------+-----------------------+-----------------------+
+| Wednesday 13:00 - 17:00   | Tonformen             | EDV_01                | *Empty*               | *Empty*               |
+|                           | by Kiefer             | by Ahorn              |                       |                       |
+|                           | all students          | all students          |                       |                       |
++---------------------------+-----------------------+-----------------------+-----------------------+-----------------------+
+| Thursday 08:00 - 12:00    | *Empty*               | Webdesign             | *Empty*               | *Empty*               |
+|                           |                       | by Eiche              |                       |                       |
+|                           |                       | all students          |                       |                       |
++---------------------------+-----------------------+-----------------------+-----------------------+-----------------------+
+| Thursday 13:00 - 17:00    | Malerei               | Webdesign             | *Empty*               | *Empty*               |
+|                           | by Kiefer             | by Eiche              |                       |                       |
+|                           | all students          | all students          |                       |                       |
++---------------------------+-----------------------+-----------------------+-----------------------+-----------------------+
+| Friday 08:00 - 12:00      | Malerei               | EDV_02                | *Empty*               | *Empty*               |
+|                           | by Birke              | by Ahorn              |                       |                       |
+|                           | all students          | all students          |                       |                       |
++---------------------------+-----------------------+-----------------------+-----------------------+-----------------------+
+| Friday 13:00 - 17:00      | Malerei               | EDV_02                | EDV_02                | *Empty*               |
+|                           | by Kiefer             | by Ahorn              | by Eiche              |                       |
+|                           | all students          | all students          | all students          |                       |
++---------------------------+-----------------------+-----------------------+-----------------------+-----------------------+
+
+Unassigned Lessons
+* EDV_02 (by Ahorn, all students)
+* EDV_02 (by Eiche, all students)
+* Webdesign (by Birke, all students)
+* Tonformen (by Kiefer, all students)
+
+=============================================================================================================================
+
+maximizeRevenue
++---------------------------+-----------------------+-----------------------+-----------------------+-----------------------+
+| Timeslot                  | Raum01                | Raum02                | Raum03                | Raum04                |
++---------------------------+-----------------------+-----------------------+-----------------------+-----------------------+
+| Monday 08:00 - 12:00      | EDV_02                | Malerei               | *Empty*               | *Empty*               |
+|                           | by Eiche              | by Birke              |                       |                       |
+|                           | all students          | all students          |                       |                       |
++---------------------------+-----------------------+-----------------------+-----------------------+-----------------------+
+| Monday 13:00 - 17:00      | EDV_02                | Tonformen             | *Empty*               | *Empty*           |
+|                           | by Eiche              | by Kiefer             |                       |                       |
+|                           | all students          | all students          |                       |                       |
++---------------------------+-----------------------+-----------------------+-----------------------+-----------------------+
+| Tuesday 08:00 - 12:00     | EDV_02                | Malerei               | *Empty*               | *Empty*               |
+|                           | by Ahorn              | by Birke              |                       |                       |
+|                           | all students          | all students          |                       |                       |
++---------------------------+-----------------------+-----------------------+-----------------------+-----------------------+
+| Tuesday 13:00 - 17:00     | EDV_02                | Tonformen             | *Empty*               | *Empty*               |
+|                           | by Ahorn              | by Kiefer             |                       |                       |
+|                           | all students          | all students          |                       |                       |
++---------------------------+-----------------------+-----------------------+-----------------------+-----------------------+
+| Wednesday 08:00 - 12:00   | Webdesign             | Webdesign             | EDV_01                | *Empty*               |
+|                           | by Eiche              | by Birke              | by Ahorn              |                       |
+|                           | all students          | all students          | all students          |                       |
++---------------------------+-----------------------+-----------------------+-----------------------+-----------------------+
+| Wednesday 13:00 - 17:00   | EDV_01                | Malerei               | *Empty*               | *Empty*               |
+|                           | by Ahorn              | by Kiefer             |                       |                       |
+|                           | all students          | all students          |                       |                       |
++---------------------------+-----------------------+-----------------------+-----------------------+-----------------------+
+| Thursday 08:00 - 12:00    | Webdesign             | Malerei               | *Empty*               | *Empty*               |
+|                           | by Eiche              | by Birke              |                       |                       |
+|                           | all students          | all students          |                       |                       |
++---------------------------+-----------------------+-----------------------+-----------------------+-----------------------+
+| Thursday 13:00 - 17:00    | EDV_02                | Tonformen             | *Empty*               | *Empty*               |
+|                           | by Ahorn              | by Kiefer             |                       |                       |
+|                           | all students          | all students          |                       |                       |
++---------------------------+-----------------------+-----------------------+-----------------------+-----------------------+
+| Friday 08:00 - 12:00      | EDV_01                | Webdesign             | *Empty*               | *Empty*               |
+|                           | by Ahorn              | by Eiche              |                       |                       |
+|                           | all students          | all students          |                       |                       |
++---------------------------+-----------------------+-----------------------+-----------------------+-----------------------+
+| Friday 13:00 - 17:00      | EDV_01                | Malerei               | *Empty*               | *Empty*               |
+|                           | by Ahorn              | by Kiefer             |                       |                       |
+|                           | all students          | all students          |                       |                       |
++---------------------------+-----------------------+-----------------------+-----------------------+-----------------------+
+
+Unassigned Lessons
+* EDV_02 (by Ahorn, all students)
+* EDV_02 (by Eiche, all students)
+* Webdesign (by Birke, all students)
+* Malerei (by Kiefer, all students)
+
+=============================================================================================================================
+
+With maximizeScheduledLessons, EDV_01 and Malerei are fully assigned as these are the courses with the highest demand.
+EDV_01 is put into Room 2 as that one has the highest capacity, and Malerei receives Room 1 with the second-highest capacity.
+The other courses are filled in where needed in order to maximize the teachers' capacities.
+
+maximizeRevenue turns things around, however. Tonformen and Malerei are now fully assigned and put into highest-capacity Room 2, because their entry fees are highest.
+The course with the other second-highest entry-fee, EDV_02, is not assigned more because the relatively low demand holds it back. Assigning courses no one takes is of no value.
+Webdesign and EDV_01 then fill up leftover slots, with Webdesign taking the remaining slots in Room 2 because it has the greater entry fee.

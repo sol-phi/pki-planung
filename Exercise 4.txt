@@ -1,0 +1,39 @@
+The first of the two methods, PDDL, can shine with its simplicity.
+Where Timefold needs to explicitly define classes with boilerplate constructors, getters and setters for the individual objects in the domain,
+PDDL can just list them succinctly as types.
+
+Furthermore, because PDDL defines general blueprints for the facts in the form of predicates and functions,
+the planner can dynamically generate the planning entities in the quantities it needs.
+This allows for a plan to be generated without having to specify how many of each lesson should appear in the plan.
+Timefold on the other hand needs this specification in the problem file.
+However, if there is an upper bound constraint in place for the planning entity,
+this can be circumvented by having the lesson quantities match or surpass the upper bound, as demonstrated in this exercise.
+In projects where the quantities of the planning entities are not known, PDDL is recommended.
+
+Timefold is not all bad though.
+It perfectly adheres to the Single Responsibility Principle when it comes to the constraints.
+Every constraint is defined in exactly one method.
+That is much easier to manage than the preconditions and effects of the usually vast actions in PDDL that the planner can use to reach its goal.
+In the case of this timetable scheduling scenario, the precondition and effect predicates representing the constraints are all packed in one action, schedule-course.
+Here, Timefold is generally preferable over PDDL when intending to scale larger the project.
+
+Even in the planning approach, PDDL and Timefold differ.
+
+PDDL uses an action-based state-space search,
+which means it views the problem as getting from the initial state (zero courses assigned) to the final state, the solution to the plan.
+The actions defined in the domain file are the steps it can take to reach the final state.
+With that, a decision tree of all possible actions that can be taken in all possible orders is constructed, and the planner uses heuristics to select actions until the goal is reached.
+Hard constraints are modeled as preconditions to actions. They strictly cannot be taken if the condition is not fulfilled,
+and soft constraints appear in the form of metrics, numbers to optimize as the planner travels through the tree.
+So, PDDL returns not just a solution but the path to reach the solution as well, which can be useful depending on the kind of problem.
+
+Timefold on the other hand performs something known as "Heuristic Local Search Optimization".
+It starts by constructing an initial, but often incomplete or constraint-violating solution.
+Then, the solution is tweaked with a local search until every constraint is satisfied.
+Hard and soft constraints are represented using scores, one for each constraint type.
+Violating constraints drops and satisfying constraints increases the score. The score is then maximized.
+It does not return a solution path, making it ideal for problems where the path isn't relevant in the first place.
+
+The inherent differences in the planners' approaches can be noticed in the context of the returned solutions as well.
+PDDL either finds a plan that fulfills all constraints perfectly, or it does not find a plan at all.
+Timefold always returns a plan, even with penalties aka imperfections.
