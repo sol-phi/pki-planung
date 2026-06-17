@@ -1,14 +1,18 @@
 package org.acme.schooltimetabling.solver;
 
 import java.time.Duration;
+import java.time.LocalTime;
+import java.util.Map;
 
 import ai.timefold.solver.core.api.score.HardSoftScore;
 import ai.timefold.solver.core.api.score.stream.Constraint;
+import ai.timefold.solver.core.api.score.stream.ConstraintCollectors;
 import ai.timefold.solver.core.api.score.stream.ConstraintFactory;
 import ai.timefold.solver.core.api.score.stream.ConstraintProvider;
 import ai.timefold.solver.core.api.score.stream.Joiners;
 
 import org.acme.schooltimetabling.domain.Lesson;
+import org.acme.schooltimetabling.domain.Teacher;
 
 public class TimetableConstraintProvider implements ConstraintProvider {
 
@@ -18,9 +22,11 @@ public class TimetableConstraintProvider implements ConstraintProvider {
                 // Hard constraints
                 roomConflict(constraintFactory),
                 teacherConflict(constraintFactory),
-                studentGroupConflict(constraintFactory),
+                teacherWeeklyCapacity(constraintFactory),
+                partTimeTeachers(constraintFactory),
 
                 // Soft constraints
+                maximizeScheduledLessons(constraintFactory),
                 teacherRoomStability(constraintFactory),
                 teacherTimeEfficiency(constraintFactory),
                 studentGroupSubjectVariety(constraintFactory)
@@ -51,14 +57,48 @@ public class TimetableConstraintProvider implements ConstraintProvider {
                 .asConstraint("Teacher conflict");
     }
 
-    Constraint studentGroupConflict(ConstraintFactory constraintFactory) {
-        // A student can attend at most one lesson at the same time.
+    Constraint teacherWeeklyCapacity(ConstraintFactory constraintFactory) {
+        // Assumes unique teacher names, due to the requirement of passing strings to the Lesson constructor for the frontend.
+        // Counts the amount of assigned lessons a given teacher has.
+        // Then, remove every teacher but the ones that are over their capacity limit, and penalize these.
         return constraintFactory
-                .forEachUniquePair(Lesson.class,
-                        Joiners.equal(Lesson::getTimeslot),
-                        Joiners.equal(Lesson::getStudentGroup))
+                .forEach(Lesson.class)
+                .filter(lesson -> lesson.getTimeslot() != null && lesson.getRoom() != null)
+                .join(Teacher.class,
+                        Joiners.equal(Lesson::getTeacher, Teacher::getName))
+                .groupBy((lesson, teacher) -> teacher, ConstraintCollectors.countBi())
+                .filter((teacher, count) -> count > teacher.getWeeklyCapacity())
+                .penalize(HardSoftScore.ONE_HARD,
+                        (teacher, count) -> count - teacher.getWeeklyCapacity())
+                .asConstraint("Teacher weekly capacity");
+    }
+
+    Constraint partTimeTeachers(ConstraintFactory constraintFactory) {
+        // Collects teachers that are teaching assigned lessons when they shouldn't be, and penalize them.
+        return constraintFactory
+                .forEach(Lesson.class)
+                .filter(lesson -> lesson.getTimeslot() != null && lesson.getRoom() != null)
+                .join(Teacher.class,
+                        Joiners.equal(Lesson::getTeacher, Teacher::getName))
+                .filter((lesson, teacher) -> {
+                    LocalTime start = lesson.getTimeslot().getStartTime();
+                    return switch (teacher.getTimeAvailability()) {
+                        case Teacher.TimeAvailability.AM_ONLY -> start.getHour() >= 13;
+                        case Teacher.TimeAvailability.PM_ONLY -> start.getHour() < 13;
+                        case Teacher.TimeAvailability.FULL_TIME -> false;
+                    };
+                })
                 .penalize(HardSoftScore.ONE_HARD)
-                .asConstraint("Student group conflict");
+                .asConstraint("Part-time teacher time restriction");
+    }
+
+    Constraint maximizeScheduledLessons(ConstraintFactory constraintFactory) {
+        // Rewards every assigned lesson, incentivizing the solver to assign a lot of them (soft constraint).
+        return constraintFactory
+                .forEach(Lesson.class)
+                .filter(lesson -> lesson.getTimeslot() != null && lesson.getRoom() != null)
+                .reward(HardSoftScore.ONE_SOFT)
+                .asConstraint("Maximize scheduled lessons");
     }
 
     Constraint teacherRoomStability(ConstraintFactory constraintFactory) {

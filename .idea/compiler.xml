@@ -7,12 +7,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="scheduling" />
-        <module name="resource-planning" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="optaplanner-scheduling" target="21" />
       <module name="optaplanner-resource-planning" target="21" />
+      <module name="optaplanner-scheduling" target="21" />
+      <module name="resource-planning" target="21" />
     </bytecodeTargetLevel>
   </component>
 </project>

@@ -1,11 +1,9 @@
 package org.acme.schooltimetabling.domain;
 
 import java.util.List;
+import java.util.Map;
 
-import ai.timefold.solver.core.api.domain.solution.PlanningEntityCollectionProperty;
-import ai.timefold.solver.core.api.domain.solution.PlanningScore;
-import ai.timefold.solver.core.api.domain.solution.PlanningSolution;
-import ai.timefold.solver.core.api.domain.solution.ProblemFactCollectionProperty;
+import ai.timefold.solver.core.api.domain.solution.*;
 import ai.timefold.solver.core.api.domain.valuerange.ValueRangeProvider;
 import ai.timefold.solver.core.api.score.HardSoftScore;
 import ai.timefold.solver.core.api.solver.SolverStatus;
@@ -21,6 +19,8 @@ public class Timetable {
     @ProblemFactCollectionProperty
     @ValueRangeProvider
     private List<Room> rooms;
+    @ProblemFactCollectionProperty
+    private List<Teacher> teachers;
     @PlanningEntityCollectionProperty
     private List<Lesson> lessons;
 
@@ -40,10 +40,11 @@ public class Timetable {
         this.solverStatus = solverStatus;
     }
 
-    public Timetable(String name, List<Timeslot> timeslots, List<Room> rooms, List<Lesson> lessons) {
+    public Timetable(String name, List<Timeslot> timeslots, List<Room> rooms, List<Lesson> lessons, List<Teacher> teachers) {
         this.name = name;
         this.timeslots = timeslots;
         this.rooms = rooms;
+        this.teachers = teachers;
         this.lessons = lessons;
     }
 
@@ -62,6 +63,8 @@ public class Timetable {
     public List<Room> getRooms() {
         return rooms;
     }
+
+    public List<Teacher> getTeachers() { return teachers; }
 
     public List<Lesson> getLessons() {
         return lessons;

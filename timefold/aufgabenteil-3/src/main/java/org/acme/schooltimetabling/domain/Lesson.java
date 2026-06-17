@@ -16,11 +16,11 @@ public class Lesson {
     private String studentGroup;
 
     @JsonIdentityReference
-    @PlanningVariable
+    @PlanningVariable(allowsUnassigned = true)
     private Timeslot timeslot;
 
     @JsonIdentityReference
-    @PlanningVariable
+    @PlanningVariable(allowsUnassigned = true)
     private Room room;
 
     public Lesson() {
