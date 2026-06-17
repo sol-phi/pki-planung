@@ -12,6 +12,7 @@ import ai.timefold.solver.core.api.score.stream.ConstraintProvider;
 import ai.timefold.solver.core.api.score.stream.Joiners;
 
 import org.acme.schooltimetabling.domain.Lesson;
+import org.acme.schooltimetabling.domain.Subject;
 import org.acme.schooltimetabling.domain.Teacher;
 
 public class TimetableConstraintProvider implements ConstraintProvider {
@@ -27,6 +28,7 @@ public class TimetableConstraintProvider implements ConstraintProvider {
 
                 // Soft constraints
                 maximizeScheduledLessons(constraintFactory),
+                roomCapacity(constraintFactory),
                 teacherRoomStability(constraintFactory),
                 teacherTimeEfficiency(constraintFactory),
                 studentGroupSubjectVariety(constraintFactory)
@@ -97,8 +99,27 @@ public class TimetableConstraintProvider implements ConstraintProvider {
         return constraintFactory
                 .forEach(Lesson.class)
                 .filter(lesson -> lesson.getTimeslot() != null && lesson.getRoom() != null)
-                .reward(HardSoftScore.ONE_SOFT, Lesson::getDemand)
+                .join(Subject.class,
+                        Joiners.equal(Lesson::getSubject, Subject::getName))
+                .reward(HardSoftScore.of(0, 4), (lesson, subject) -> subject.getDemand())
                 .asConstraint("Maximize scheduled lessons");
+    }
+
+    Constraint roomCapacity(ConstraintFactory constraintFactory) {
+        // Collect every scheduled lesson, group them by subject and determine the sum of room capacities for that subject.
+        // Then, lessons where the subject's demand exceeds the total capacity are singled out.
+        // These are penalized more strongly than other soft constraints so that it is prioritized.
+        return constraintFactory
+                .forEach(Lesson.class)
+                .filter(lesson -> lesson.getRoom() != null && lesson.getTimeslot() != null)
+                .join(Subject.class,
+                        Joiners.equal(Lesson::getSubject, Subject::getName))
+                .groupBy((lesson, subject) -> subject,
+                        ConstraintCollectors.sum((lesson, subject) -> lesson.getRoom().getCapacity()))
+                .filter((subject, totalCapacity) -> totalCapacity < subject.getDemand())
+                .penalize(HardSoftScore.of(0, 2),
+                        (subject, totalCapacity) -> subject.getDemand() - totalCapacity)
+                .asConstraint("Room capacity");
     }
 
     Constraint teacherRoomStability(ConstraintFactory constraintFactory) {

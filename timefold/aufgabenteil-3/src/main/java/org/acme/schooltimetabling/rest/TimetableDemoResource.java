@@ -64,10 +64,18 @@ public class TimetableDemoResource {
 
         List<Room> rooms = new ArrayList<>(3);
         long nextRoomId = 0L;
-        rooms.add(new Room(Long.toString(nextRoomId++), "Raum01"));
-        rooms.add(new Room(Long.toString(nextRoomId++), "Raum02"));
-        rooms.add(new Room(Long.toString(nextRoomId++), "Raum03"));
-        rooms.add(new Room(Long.toString(nextRoomId++), "Raum04"));
+        rooms.add(new Room(Long.toString(nextRoomId++), "Raum01", 10));
+        rooms.add(new Room(Long.toString(nextRoomId++), "Raum02", 12));
+        rooms.add(new Room(Long.toString(nextRoomId++), "Raum03", 8));
+        rooms.add(new Room(Long.toString(nextRoomId++), "Raum04", 5));
+
+        List<Subject> subjects = new ArrayList<>();
+        long nextSubjectId = 0L;
+        subjects.add(new Subject(Long.toString(nextSubjectId++),"EDV_01",  123));
+        subjects.add(new Subject(Long.toString(nextSubjectId++),"EDV_02",  50));
+        subjects.add(new Subject(Long.toString(nextSubjectId++),"Webdesign",  84));
+        subjects.add(new Subject(Long.toString(nextSubjectId++),"Malerei", 105));
+        subjects.add(new Subject(Long.toString(nextSubjectId++),"Tonformen", 39));
 
         List<Teacher> teachers = new ArrayList<>();
         long nextTeacherId = 0L;
@@ -79,33 +87,33 @@ public class TimetableDemoResource {
         // One more lesson than max capacity of the respective teacher is scheduled each, so that the soft constraints can kick in.
         List<Lesson> lessons = new ArrayList<>();
         long nextLessonId = 0L;
-        lessons.add(new Lesson(Long.toString(nextLessonId++), "EDV_01", "Ahorn", "all students", 123));
-        lessons.add(new Lesson(Long.toString(nextLessonId++), "EDV_01", "Ahorn", "all students", 123));
-        lessons.add(new Lesson(Long.toString(nextLessonId++), "EDV_01", "Ahorn", "all students", 123));
-        lessons.add(new Lesson(Long.toString(nextLessonId++), "EDV_01", "Ahorn", "all students", 123));
-        lessons.add(new Lesson(Long.toString(nextLessonId++), "EDV_02", "Ahorn", "all students", 50));
-        lessons.add(new Lesson(Long.toString(nextLessonId++), "EDV_02", "Ahorn", "all students", 50));
-        lessons.add(new Lesson(Long.toString(nextLessonId++), "EDV_02", "Ahorn", "all students", 50));
-        lessons.add(new Lesson(Long.toString(nextLessonId++), "EDV_02", "Ahorn", "all students", 50));
-        lessons.add(new Lesson(Long.toString(nextLessonId++), "EDV_02", "Eiche", "all students", 50));
-        lessons.add(new Lesson(Long.toString(nextLessonId++), "EDV_02", "Eiche", "all students", 50));
-        lessons.add(new Lesson(Long.toString(nextLessonId++), "EDV_02", "Eiche", "all students", 50));
-        lessons.add(new Lesson(Long.toString(nextLessonId++), "Webdesign", "Eiche", "all students", 84));
-        lessons.add(new Lesson(Long.toString(nextLessonId++), "Webdesign", "Eiche", "all students", 84));
-        lessons.add(new Lesson(Long.toString(nextLessonId++), "Webdesign", "Eiche", "all students", 84));
-        lessons.add(new Lesson(Long.toString(nextLessonId++), "Webdesign", "Birke", "all students", 84));
-        lessons.add(new Lesson(Long.toString(nextLessonId++), "Webdesign", "Birke", "all students", 84));
-        lessons.add(new Lesson(Long.toString(nextLessonId++), "Malerei", "Birke", "all students", 105));
-        lessons.add(new Lesson(Long.toString(nextLessonId++), "Malerei", "Birke", "all students", 105));
-        lessons.add(new Lesson(Long.toString(nextLessonId++), "Malerei", "Birke", "all students", 105));
-        lessons.add(new Lesson(Long.toString(nextLessonId++), "Malerei", "Kiefer", "all students", 105));
-        lessons.add(new Lesson(Long.toString(nextLessonId++), "Malerei", "Kiefer", "all students", 105));
-        lessons.add(new Lesson(Long.toString(nextLessonId++), "Malerei", "Kiefer", "all students", 105));
-        lessons.add(new Lesson(Long.toString(nextLessonId++), "Tonformen", "Kiefer", "all students", 39));
-        lessons.add(new Lesson(Long.toString(nextLessonId++), "Tonformen", "Kiefer", "all students", 39));
-        lessons.add(new Lesson(Long.toString(nextLessonId++), "Tonformen", "Kiefer", "all students", 39));
+        lessons.add(new Lesson(Long.toString(nextLessonId++), "EDV_01", "Ahorn", "all students"));
+        lessons.add(new Lesson(Long.toString(nextLessonId++), "EDV_01", "Ahorn", "all students"));
+        lessons.add(new Lesson(Long.toString(nextLessonId++), "EDV_01", "Ahorn", "all students"));
+        lessons.add(new Lesson(Long.toString(nextLessonId++), "EDV_01", "Ahorn", "all students"));
+        lessons.add(new Lesson(Long.toString(nextLessonId++), "EDV_02", "Ahorn", "all students"));
+        lessons.add(new Lesson(Long.toString(nextLessonId++), "EDV_02", "Ahorn", "all students"));
+        lessons.add(new Lesson(Long.toString(nextLessonId++), "EDV_02", "Ahorn", "all students"));
+        lessons.add(new Lesson(Long.toString(nextLessonId++), "EDV_02", "Ahorn", "all students"));
+        lessons.add(new Lesson(Long.toString(nextLessonId++), "EDV_02", "Eiche", "all students"));
+        lessons.add(new Lesson(Long.toString(nextLessonId++), "EDV_02", "Eiche", "all students"));
+        lessons.add(new Lesson(Long.toString(nextLessonId++), "EDV_02", "Eiche", "all students"));
+        lessons.add(new Lesson(Long.toString(nextLessonId++), "Webdesign", "Eiche", "all students"));
+        lessons.add(new Lesson(Long.toString(nextLessonId++), "Webdesign", "Eiche", "all students"));
+        lessons.add(new Lesson(Long.toString(nextLessonId++), "Webdesign", "Eiche", "all students"));
+        lessons.add(new Lesson(Long.toString(nextLessonId++), "Webdesign", "Birke", "all students"));
+        lessons.add(new Lesson(Long.toString(nextLessonId++), "Webdesign", "Birke", "all students"));
+        lessons.add(new Lesson(Long.toString(nextLessonId++), "Malerei", "Birke", "all students"));
+        lessons.add(new Lesson(Long.toString(nextLessonId++), "Malerei", "Birke", "all students"));
+        lessons.add(new Lesson(Long.toString(nextLessonId++), "Malerei", "Birke", "all students"));
+        lessons.add(new Lesson(Long.toString(nextLessonId++), "Malerei", "Kiefer", "all students"));
+        lessons.add(new Lesson(Long.toString(nextLessonId++), "Malerei", "Kiefer", "all students"));
+        lessons.add(new Lesson(Long.toString(nextLessonId++), "Malerei", "Kiefer", "all students"));
+        lessons.add(new Lesson(Long.toString(nextLessonId++), "Tonformen", "Kiefer", "all students"));
+        lessons.add(new Lesson(Long.toString(nextLessonId++), "Tonformen", "Kiefer", "all students"));
+        lessons.add(new Lesson(Long.toString(nextLessonId++), "Tonformen", "Kiefer", "all students"));
 
-        return Response.ok(new Timetable(demoData.name(), timeslots, rooms, lessons, teachers)).build();
+        return Response.ok(new Timetable(demoData.name(), timeslots, rooms, lessons, subjects, teachers)).build();
     }
 
 }

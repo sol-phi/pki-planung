@@ -14,7 +14,6 @@ public class Lesson {
     private String subject;
     private String teacher;
     private String studentGroup;
-    private int demand;
 
     @JsonIdentityReference
     @PlanningVariable(allowsUnassigned = true)
@@ -27,16 +26,15 @@ public class Lesson {
     public Lesson() {
     }
 
-    public Lesson(String id, String subject, String teacher, String studentGroup, int demand) {
+    public Lesson(String id, String subject, String teacher, String studentGroup) {
         this.id = id;
         this.subject = subject;
         this.teacher = teacher;
         this.studentGroup = studentGroup;
-        this.demand = demand;
     }
 
-    public Lesson(String id, String subject, String teacher, String studentGroup, int demand, Timeslot timeslot, Room room) {
-        this(id, subject, teacher, studentGroup, demand);
+    public Lesson(String id, String subject, String teacher, String studentGroup, Timeslot timeslot, Room room) {
+        this(id, subject, teacher, studentGroup);
         this.timeslot = timeslot;
         this.room = room;
     }
@@ -64,10 +62,6 @@ public class Lesson {
 
     public String getStudentGroup() {
         return studentGroup;
-    }
-
-    public int getDemand() {
-        return demand;
     }
 
     public Timeslot getTimeslot() {

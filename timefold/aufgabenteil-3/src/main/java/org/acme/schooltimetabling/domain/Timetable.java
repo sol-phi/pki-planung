@@ -20,6 +20,8 @@ public class Timetable {
     @ValueRangeProvider
     private List<Room> rooms;
     @ProblemFactCollectionProperty
+    private List<Subject> subjects;
+    @ProblemFactCollectionProperty
     private List<Teacher> teachers;
     @PlanningEntityCollectionProperty
     private List<Lesson> lessons;
@@ -40,10 +42,11 @@ public class Timetable {
         this.solverStatus = solverStatus;
     }
 
-    public Timetable(String name, List<Timeslot> timeslots, List<Room> rooms, List<Lesson> lessons, List<Teacher> teachers) {
+    public Timetable(String name, List<Timeslot> timeslots, List<Room> rooms, List<Lesson> lessons, List<Subject> subjects, List<Teacher> teachers) {
         this.name = name;
         this.timeslots = timeslots;
         this.rooms = rooms;
+        this.subjects = subjects;
         this.teachers = teachers;
         this.lessons = lessons;
     }
@@ -62,6 +65,10 @@ public class Timetable {
 
     public List<Room> getRooms() {
         return rooms;
+    }
+
+    public List<Subject> getSubjects() {
+        return subjects;
     }
 
     public List<Teacher> getTeachers() { return teachers; }

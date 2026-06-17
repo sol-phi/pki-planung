@@ -4,22 +4,22 @@ import ai.timefold.solver.core.api.domain.common.PlanningId;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
-@JsonIdentityInfo(scope = Room.class, generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-public class Room {
+@JsonIdentityInfo(scope = Subject.class, generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+public class Subject {
 
     @PlanningId
     private String id;
 
     private String name;
-    private int capacity;
+    private int demand;
 
-    public Room() {
+    public Subject() {
     }
 
-    public Room(String id, String name, int capacity) {
+    public Subject(String id, String name, int demand) {
         this.id = id;
         this.name = name;
-        this.capacity = capacity;
+        this.demand = demand;
     }
 
     @Override
@@ -39,7 +39,7 @@ public class Room {
         return name;
     }
 
-    public int getCapacity() {
-        return capacity;
+    public int getDemand() {
+        return demand;
     }
 }
