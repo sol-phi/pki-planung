@@ -93,11 +93,11 @@ public class TimetableConstraintProvider implements ConstraintProvider {
     }
 
     Constraint maximizeScheduledLessons(ConstraintFactory constraintFactory) {
-        // Rewards every assigned lesson, incentivizing the solver to assign a lot of them (soft constraint).
+        // Rewards every assigned lesson with a +1 weighted with the demand. This incentivizes the solver to assign a lot of them (soft constraint).
         return constraintFactory
                 .forEach(Lesson.class)
                 .filter(lesson -> lesson.getTimeslot() != null && lesson.getRoom() != null)
-                .reward(HardSoftScore.ONE_SOFT)
+                .reward(HardSoftScore.ONE_SOFT, Lesson::getDemand)
                 .asConstraint("Maximize scheduled lessons");
     }
 
