@@ -1,0 +1,141 @@
+===============================================================================
+DOKUMENTATION: AUFGABENTEIL 5
+===============================================================================
+
+5a) Basis-Modell: Erfüllung der Anforderungen
+---------------------------------------------
+Nach der Implementierung der harten Regeln (Hard Constraints) wie mindestens ein
+vegetarisches Gericht pro Tag (`atLeastOneVegetarianPerDay`), unterschiedliche
+Gerichte am selben Tag (`differentMealsSameDay`) und dem Verbot identischer
+Hauptkomponenten an Folgetagen (`noIdenticalMainComponentsConsecutiveDays`) sucht
+der Solver lediglich eine gültige Kombination, die keine harten Regeln verletzt.
+
+Da noch keine finanzielle Steuerung aktiv ist, greift der Algorithmus schnell auf
+wiederkehrende Kombinationen zurück, sobald eine zulässige Sequenz gefunden wurde.
+
+VOLLSTÄNDIGER SPEISEPLAN 5a (30 TAGE AUS SOLVER-OUTPUT):
+Tag 01: M1. Pasta mit Hähnchen            | M3. Tofu-Zucchini Curry
+Tag 02: M4. Ofenkartoffel mit Sour Cream  | M10. Kartoffelauflauf mit Schwein
+Tag 03: M5. Pasta mit Pilzen              | M6. Reisbowl mit Tofu
+Tag 04: M8. Gefüllte Kartoffel            | M16. Kartoffelsuppe
+Tag 05: M2. Bratreis mit Schwein          | M3. Tofu-Zucchini Curry
+Tag 06: M1. Pasta mit Hähnchen            | M4. Ofenkartoffel mit Sour Cream
+Tag 07: M6. Reisbowl mit Tofu             | M9. Reispfanne mit Brokkoli
+Tag 08: M5. Pasta mit Pilzen              | M7. Pasta mit Zucchini
+Tag 09: M2. Bratreis mit Schwein          | M3. Tofu-Zucchini Curry
+Tag 10: M1. Pasta mit Hähnchen            | M4. Ofenkartoffel mit Sour Cream
+Tag 11: M6. Reisbowl mit Tofu             | M9. Reispfanne mit Brokkoli
+Tag 12: M5. Pasta mit Pilzen              | M7. Pasta mit Zucchini
+Tag 13: M2. Bratreis mit Schwein          | M3. Tofu-Zucchini Curry
+Tag 14: M1. Pasta mit Hähnchen            | M4. Ofenkartoffel mit Sour Cream
+Tag 15: M6. Reisbowl mit Tofu             | M9. Reispfanne mit Brokkoli
+Tag 16: M5. Pasta mit Pilzen              | M7. Pasta mit Zucchini
+Tag 17: M2. Bratreis mit Schwein          | M3. Tofu-Zucchini Curry
+Tag 18: M1. Pasta mit Hähnchen            | M4. Ofenkartoffel mit Sour Cream
+Tag 19: M6. Reisbowl mit Tofu             | M9. Reispfanne mit Brokkoli
+Tag 20: M5. Pasta mit Pilzen              | M7. Pasta mit Zucchini
+Tag 21: M2. Bratreis mit Schwein          | M3. Tofu-Zucchini Curry
+Tag 22: M1. Pasta mit Hähnchen            | M4. Ofenkartoffel mit Sour Cream
+Tag 23: M6. Reisbowl mit Tofu             | M9. Reispfanne mit Brokkoli
+Tag 24: M5. Pasta mit Pilzen              | M7. Pasta mit Zucchini
+Tag 25: M2. Bratreis mit Schwein          | M3. Tofu-Zucchini Curry
+Tag 26: M1. Pasta mit Hähnchen            | M4. Ofenkartoffel mit Sour Cream
+Tag 27: M6. Reisbowl mit Tofu             | M9. Reispfanne mit Brokkoli
+Tag 28: M5. Pasta mit Pilzen              | M7. Pasta mit Zucchini
+Tag 29: M2. Bratreis mit Schwein          | M3. Tofu-Zucchini Curry
+Tag 30: M1. Pasta mit Hähnchen            | M4. Ofenkartoffel mit Sour Cream
+
+
+5b) Kostenminimierung
+---------------------
+Wird das System um eine reine Kostenminimierung erweitert, versucht der Solver
+bevorzugt günstige Gerichte auszuwählen, da Proteinkomponenten den größten
+Kostenfaktor darstellen.
+
+Ohne qualitative Gegensteuerung führt dies zu einer Überoptimierung: Der Solver
+erzeugt Speisepläne mit Fokus auf billigen Kohlenhydraten (Pasta- und Kartoffel-
+komponenten ohne Proteine), was die Vielfalt einschränkt. Ein Anti-Monotonie-
+Constraint, der die Wiederholung desselben Gerichts innerhalb von drei Tagen
+bestraft, schafft hier den notwendigen Kompromiss zwischen Einsparung und Vielfalt.
+
+VOLLSTÄNDIGER SPEISEPLAN 5b (30 TAGE AUS KOSTEN-OPTIMIERUNG):
+Tag 01: M4. Ofenkartoffel mit Sour Cream  | M5. Pasta mit Pilzen
+Tag 02: M25. Kartoffelpfanne mit Brokkoli | M29. Kartoffelauflauf mit Spinat
+Tag 03: M7. Pasta mit Zucchini            | M9. Reispfanne mit Brokkoli
+Tag 04: M4. Ofenkartoffel mit Sour Cream  | M5. Pasta mit Pilzen
+Tag 05: M25. Kartoffelpfanne mit Brokkoli | M29. Kartoffelauflauf mit Spinat
+Tag 06: M7. Pasta mit Zucchini            | M9. Reispfanne mit Brokkoli
+Tag 07: M4. Ofenkartoffel mit Sour Cream  | M5. Pasta mit Pilzen
+Tag 08: M25. Kartoffelpfanne mit Brokkoli | M29. Kartoffelauflauf mit Spinat
+Tag 09: M7. Pasta mit Zucchini            | M9. Reispfanne mit Brokkoli
+Tag 10: M4. Ofenkartoffel mit Sour Cream  | M5. Pasta mit Pilzen
+Tag 11: M25. Kartoffelpfanne mit Brokkoli | M29. Kartoffelauflauf mit Spinat
+Tag 12: M7. Pasta mit Zucchini            | M9. Reispfanne mit Brokkoli
+Tag 13: M4. Ofenkartoffel mit Sour Cream  | M5. Pasta mit Pilzen
+Tag 14: M25. Kartoffelpfanne mit Brokkoli | M29. Kartoffelauflauf mit Spinat
+Tag 15: M7. Pasta mit Zucchini            | M9. Reispfanne mit Brokkoli
+Tag 16: M4. Ofenkartoffel mit Sour Cream  | M5. Pasta mit Pilzen
+Tag 17: M25. Kartoffelpfanne mit Brokkoli | M29. Kartoffelauflauf mit Spinat
+Tag 18: M7. Pasta mit Zucchini            | M9. Reispfanne mit Brokkoli
+Tag 19: M4. Ofenkartoffel mit Sour Cream  | M5. Pasta mit Pilzen
+Tag 20: M25. Kartoffelpfanne mit Brokkoli | M29. Kartoffelauflauf mit Spinat
+Tag 21: M7. Pasta mit Zucchini            | M9. Reispfanne mit Brokkoli
+Tag 22: M4. Ofenkartoffel mit Sour Cream  | M5. Pasta mit Pilzen
+Tag 23: M25. Kartoffelpfanne mit Brokkoli | M29. Kartoffelauflauf mit Spinat
+Tag 24: M7. Pasta mit Zucchini            | M9. Reispfanne mit Brokkoli
+Tag 25: M4. Ofenkartoffel mit Sour Cream  | M5. Pasta mit Pilzen
+Tag 26: M25. Kartoffelpfanne mit Brokkoli | M29. Kartoffelauflauf mit Spinat
+Tag 27: M7. Pasta mit Zucchini            | M9. Reispfanne mit Brokkoli
+Tag 28: M4. Ofenkartoffel mit Sour Cream  | M5. Pasta mit Pilzen
+Tag 29: M25. Kartoffelpfanne mit Brokkoli | M29. Kartoffelauflauf mit Spinat
+Tag 30: M7. Pasta mit Zucchini            | M9. Reispfanne mit Brokkoli
+
+
+5c) Gewinnmaximierung & Gewichtung
+----------------------------------
+Bei der Gewinnmaximierung wechselt der Fokus von den reinen Kosten hin zu den
+Einnahmen (`Gewinn = Verkaufspreis - Materialkosten`). Der Solver wird um eine
+Zielfunktion erweitert, welche profitable Gerichte belohnt. Dadurch werden
+Gerichte mit hohem Deckungsbeitrag bevorzugt, wodurch hochwertige Komponenten
+in den Plan zurückkehren.
+
+Erklärung der Gewichtung im Code:
+- Der Profit wird direkt mit dem berechneten Cent-Wert belohnt, um dem Solver
+  einen kontinuierlichen wirtschaftlichen Anreiz zu bieten.
+- Die Strafen (Penalties) für Monotonie (z. B. 600) sind im Code bewusst so
+  gewichtet, dass sie unschöne Wiederholungen hart unterdrücken, aber nicht den
+  Einsatz von wirtschaftlich attraktiven Gerichten komplett blockieren. Das
+  System balanciert somit Erlös und Vielfalt aus.
+
+VOLLSTÄNDIGER SPEISEPLAN 5c (30 TAGE BASIEREND AUF GEWINN/MARGE):
+Tag 01: M12. Reispfanne mit Tofu          | M2. Bratreis mit Schwein
+Tag 02: M26. Pasta Primavera              | M1. Pasta mit Hähnchen
+Tag 03: M17. Bohneneintopf mit Reis       | M24. Bohnenchili mit Reisbeilage
+Tag 04: M14. Nudelauflauf mit Hähnchen    | M23. Curryeintopf mit Tofu
+Tag 05: M2. Bratreis mit Schwein          | M9. Reispfanne mit Brokkoli
+Tag 06: M26. Pasta Primavera              | M1. Pasta mit Hähnchen
+Tag 07: M12. Reispfanne mit Tofu          | M17. Bohneneintopf mit Reis
+Tag 08: M14. Nudelauflauf mit Hähnchen    | M7. Pasta mit Zucchini
+Tag 09: M2. Bratreis mit Schwein          | M24. Bohnenchili mit Reisbeilage
+Tag 10: M26. Pasta Primavera              | M1. Pasta mit Hähnchen
+Tag 11: M12. Reispfanne mit Tofu          | M17. Bohneneintopf mit Reis
+Tag 12: M14. Nudelauflauf mit Hähnchen    | M7. Pasta mit Zucchini
+Tag 13: M2. Bratreis mit Schwein          | M24. Bohnenchili mit Reisbeilage
+Tag 14: M26. Pasta Primavera              | M1. Pasta mit Hähnchen
+Tag 15: M12. Reispfanne mit Tofu          | M17. Bohneneintopf mit Reis
+Tag 16: M14. Nudelauflauf mit Hähnchen    | M7. Pasta mit Zucchini
+Tag 17: M2. Bratreis mit Schwein          | M24. Bohnenchili mit Reisbeilage
+Tag 18: M26. Pasta Primavera              | M1. Pasta mit Hähnchen
+Tag 19: M12. Reispfanne mit Tofu          | M17. Bohneneintopf mit Reis
+Tag 20: M14. Nudelauflauf mit Hähnchen    | M7. Pasta mit Zucchini
+Tag 21: M2. Bratreis mit Schwein          | M24. Bohnenchili mit Reisbeilage
+Tag 22: M26. Pasta Primavera              | M1. Pasta mit Hähnchen
+Tag 23: M12. Reispfanne mit Tofu          | M17. Bohneneintopf mit Reis
+Tag 24: M14. Nudelauflauf mit Hähnchen    | M7. Pasta mit Zucchini
+Tag 25: M2. Bratreis mit Schwein          | M24. Bohnenchili mit Reisbeilage
+Tag 26: M26. Pasta Primavera              | M1. Pasta mit Hähnchen
+Tag 27: M12. Reispfanne mit Tofu          | M17. Bohneneintopf mit Reis
+Tag 28: M14. Nudelauflauf mit Hähnchen    | M7. Pasta mit Zucchini
+Tag 29: M2. Bratreis mit Schwein          | M24. Bohnenchili mit Reisbeilage
+Tag 30: M26. Pasta Primavera              | M1. Pasta mit Hähnchen
+===============================================================================

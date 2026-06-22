@@ -1,6 +1,6 @@
 # Maintenance Scheduling (Java, Quarkus, Maven)
 
-Schedule maintenance jobs to crews over time to reduce both premature and overdue maintenance.
+Schedule maintenance mealAssignments to meals over time to reduce both premature and overdue maintenance.
 
 ![Maintenance Scheduling Screenshot](./maintenance-scheduling-screenshot.png)
 
@@ -8,11 +8,11 @@ Schedule maintenance jobs to crews over time to reduce both premature and overdu
 
 | Name                  | Level | Description                                                    |
 |-----------------------|-------|----------------------------------------------------------------|
-| Crew conflict         | Hard  | A maintenance crew cannot be assigned to two overlapping jobs. |
-| Min start date        | Hard  | A job must not start before its minimum start date.            |
-| Max end date          | Hard  | A job must not finish after its maximum end date.              |
-| Before ideal end date | Soft  | Avoid finishing a job too early before its ideal end date.     |
-| After ideal end date  | Soft  | Avoid finishing a job after its ideal end date.                |
+| Crew conflict         | Hard  | A maintenance meal cannot be assigned to two overlapping mealAssignments. |
+| Min start date        | Hard  | A mealAssignment must not start before its minimum start date.            |
+| Max end date          | Hard  | A mealAssignment must not finish after its maximum end date.              |
+| Before ideal end date | Soft  | Avoid finishing a mealAssignment too early before its ideal end date.     |
+| After ideal end date  | Soft  | Avoid finishing a mealAssignment after its ideal end date.                |
 | Tag conflict          | Soft  | Jobs sharing the same tag should not overlap.                  |
 
 - [Run the application](#run-the-application)

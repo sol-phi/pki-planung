@@ -1,0 +1,126 @@
++-----+-----------------------------------------------------------------------+-----------------------------------------------------------------------+
+| Tag | Mahlzeit 1 (Mittag)                                                   | Mahlzeit 2 (Abend)                                                    |
++-----+-----------------------------------------------------------------------+-----------------------------------------------------------------------+
+| 01  | 5. Pasta mit Pilzen in Sahnesauce                                     | 18. Pilzpfanne Stroganoff Art mit Pasta und Sahnesauce                |
+| 02  | 3. Tofu-Zucchini Curry im Reisrand                                    | 24. Bohnenchili mit Tomaten, Zucchini und Reisbeilage                 |
+| 03  | 7. Pasta mit Zucchini, Tomaten und Pfeffersauce                       | 14. Nudelauflauf mit Hähnchen, Tomaten und Tomatensauce               |
+| 04  | 25. Kartoffelpfanne mit Brokkoli und Pfeffersauce                     | 4. Ofenkartoffel mit Sour Cream                                       |
+| 05  | 18. Pilzpfanne Stroganoff Art mit Pasta und Sahnesauce                | 5. Pasta mit Pilzen in Sahnesauce                                     |
+| 06  | 17. Bohneneintopf mit Zucchini und Tomaten mit Reiseinlage            | 24. Bohnenchili mit Tomaten, Zucchini und Reisbeilage                 |
+| 07  | 19. Hähnchen Stroganoff Art mit Pilzen, Pasta und Sahnesauce          | 5. Pasta mit Pilzen in Sahnesauce                                     |
+| 08  | 17. Bohneneintopf mit Zucchini und Tomaten mit Reiseinlage            | 24. Bohnenchili mit Tomaten, Zucchini und Reisbeilage                 |
+| 09  | 5. Pasta mit Pilzen in Sahnesauce                                     | 18. Pilzpfanne Stroganoff Art mit Pasta und Sahnesauce                |
+| 10  | 23. Curryeintopf mit Tofu, Spinat und Brokkoli                        | 12. Reispfanne mit Tofu, Pilzen und Brokkoli an Tomatensauce          |
+| 11  | 5. Pasta mit Pilzen in Sahnesauce                                     | 18. Pilzpfanne Stroganoff Art mit Pasta und Sahnesauce                |
+| 12  | 8. Gefüllte Kartoffel mit Hähnchen, Zwiebeln und Sahnesauce           | 21. Kartoffelreibekuchen mit Zucchini und Zwiebeln                    |
+| 13  | 18. Pilzpfanne Stroganoff Art mit Pasta und Sahnesauce                | 5. Pasta mit Pilzen in Sahnesauce                                     |
+| 14  | 8. Gefüllte Kartoffel mit Hähnchen, Zwiebeln und Sahnesauce           | 16. Kartoffelsuppe mit Zwiebeln und Fleischersatzeinlage              |
+| 15  | 24. Bohnenchili mit Tomaten, Zucchini und Reisbeilage                 | 3. Tofu-Zucchini Curry im Reisrand                                    |
+| 16  | 26. Pasta Primavera mit Zucchini, Tomaten, Zwiebeln und Sahnesauce    | 19. Hähnchen Stroganoff Art mit Pilzen, Pasta und Sahnesauce          |
+| 17  | 15. Reispfanne mit Schwein, Zucchini und Pfeffersauce                 | 24. Bohnenchili mit Tomaten, Zucchini und Reisbeilage                 |
+| 18  | 8. Gefüllte Kartoffel mit Hähnchen, Zwiebeln und Sahnesauce           | 21. Kartoffelreibekuchen mit Zucchini und Zwiebeln                    |
+| 19  | 5. Pasta mit Pilzen in Sahnesauce                                     | 18. Pilzpfanne Stroganoff Art mit Pasta und Sahnesauce                |
+| 20  | 24. Bohnenchili mit Tomaten, Zucchini und Reisbeilage                 | 17. Bohneneintopf mit Zucchini und Tomaten mit Reiseinlage            |
+| 21  | 5. Pasta mit Pilzen in Sahnesauce                                     | 19. Hähnchen Stroganoff Art mit Pilzen, Pasta und Sahnesauce          |
+| 22  | 4. Ofenkartoffel mit Sour Cream                                       | 29. Kartoffelauflauf mit Spinat und Sour Cream                        |
+| 23  | 18. Pilzpfanne Stroganoff Art mit Pasta und Sahnesauce                | 19. Hähnchen Stroganoff Art mit Pilzen, Pasta und Sahnesauce          |
+| 24  | 17. Bohneneintopf mit Zucchini und Tomaten mit Reiseinlage            | 24. Bohnenchili mit Tomaten, Zucchini und Reisbeilage                 |
+| 25  | 19. Hähnchen Stroganoff Art mit Pilzen, Pasta und Sahnesauce          | 5. Pasta mit Pilzen in Sahnesauce                                     |
+| 26  | 3. Tofu-Zucchini Curry im Reisrand                                    | 2. Bratreis mit Schwein, Brokkoli und Pfeffersauce                     |
+| 27  | 5. Pasta mit Pilzen in Sahnesauce                                     | 18. Pilzpfanne Stroganoff Art mit Pasta und Sahnesauce                |
+| 28  | 24. Bohnenchili mit Tomaten, Zucchini und Reisbeilage                 | 17. Bohneneintopf mit Zucchini und Tomaten mit Reiseinlage            |
+| 29  | 29. Kartoffelauflauf mit Spinat und Sour Cream                        | 4. Ofenkartoffel mit Sour Cream                                       |
+| 30  | 18. Pilzpfanne Stroganoff Art mit Pasta und Sahnesauce                | 5. Pasta mit Pilzen in Sahnesauce                                     |
++-----+-----------------------------------------------------------------------+-----------------------------------------------------------------------+
+
+A)
+Nach Implementierung von atLeastOneVegetarianPerDay, noIdenticalMainComponentsConsecutiveDays(constraintFactory),
+maximizeSharedIngredientsSameDay der planner hat versucht immer das gleiche Gericht für einen Tag
+anzubieten "score":"0hard/0soft". gelöst durch differentMealsSameDay . Nun er hat sich die kombi gemerkt die am meisten Belohnung
+bringen. Der Code erkennt keine Monotonie oder Langweile "score":"0hard/-29soft". Gelöst durch umsetzung der Anforderung aus der Aufgabenstellung
+mit Studenten möchten, dass die Hauptkomponenten nicht auf zwei aufeinanderfolgenden Tagen identisch sind"score":"0hard/-46soft".
+
+
+
+
+B)
+
++-----+-----------------------------------------------------------------------+-----------------------------------------------------------------------+
+| Tag | Mahlzeit 1 (Mittag)                                                   | Mahlzeit 2 (Abend)                                                    |
++-----+-----------------------------------------------------------------------+-----------------------------------------------------------------------+
+| 01  | 4. Ofenkartoffel mit Sour Cream (75ct)                                | 29. Kartoffelauflauf mit Spinat und Sour Cream (125ct)                |
+| 02  | 5. Pasta mit Pilzen in Sahnesauce (125ct)                             | 18. Pilzpfanne Stroganoff Art mit Pasta und Sahnesauce (125ct)        |
+| 03  | 4. Ofenkartoffel mit Sour Cream (75ct)                                | 29. Kartoffelauflauf mit Spinat und Sour Cream (125ct)                |
+| 04  | 5. Pasta mit Pilzen in Sahnesauce (125ct)                             | 18. Pilzpfanne Stroganoff Art mit Pasta und Sahnesauce (125ct)        |
+| 05  | 4. Ofenkartoffel mit Sour Cream (75ct)                                | 29. Kartoffelauflauf mit Spinat und Sour Cream (125ct)                |
+| 06  | 5. Pasta mit Pilzen in Sahnesauce (125ct)                             | 18. Pilzpfanne Stroganoff Art mit Pasta und Sahnesauce (125ct)        |
+| 07  | 4. Ofenkartoffel mit Sour Cream (75ct)                                | 29. Kartoffelauflauf mit Spinat und Sour Cream (125ct)                |
+| 08  | 5. Pasta mit Pilzen in Sahnesauce (125ct)                             | 18. Pilzpfanne Stroganoff Art mit Pasta und Sahnesauce (125ct)        |
+| 09  | 4. Ofenkartoffel mit Sour Cream (75ct)                                | 29. Kartoffelauflauf mit Spinat und Sour Cream (125ct)                |
+| 10  | 5. Pasta mit Pilzen in Sahnesauce (125ct)                             | 18. Pilzpfanne Stroganoff Art mit Pasta und Sahnesauce (125ct)        |
+| 11  | 4. Ofenkartoffel mit Sour Cream (75ct)                                | 29. Kartoffelauflauf mit Spinat und Sour Cream (125ct)                |
+| 12  | 5. Pasta mit Pilzen in Sahnesauce (125ct)                             | 18. Pilzpfanne Stroganoff Art mit Pasta und Sahnesauce (125ct)        |
+| 13  | 4. Ofenkartoffel mit Sour Cream (75ct)                                | 29. Kartoffelauflauf mit Spinat und Sour Cream (125ct)                |
+| 14  | 5. Pasta mit Pilzen in Sahnesauce (125ct)                             | 18. Pilzpfanne Stroganoff Art mit Pasta und Sahnesauce (125ct)        |
+| 15  | 4. Ofenkartoffel mit Sour Cream (75ct)                                | 29. Kartoffelauflauf mit Spinat und Sour Cream (125ct)                |
+| 16  | 5. Pasta mit Pilzen in Sahnesauce (125ct)                             | 18. Pilzpfanne Stroganoff Art mit Pasta und Sahnesauce (125ct)        |
+| 17  | 4. Ofenkartoffel mit Sour Cream (75ct)                                | 29. Kartoffelauflauf mit Spinat und Sour Cream (125ct)                |
+| 18  | 5. Pasta mit Pilzen in Sahnesauce (125ct)                             | 18. Pilzpfanne Stroganoff Art mit Pasta und Sahnesauce (125ct)        |
+| 19  | 4. Ofenkartoffel mit Sour Cream (75ct)                                | 29. Kartoffelauflauf mit Spinat und Sour Cream (125ct)                |
+| 20  | 5. Pasta mit Pilzen in Sahnesauce (125ct)                             | 18. Pilzpfanne Stroganoff Art mit Pasta und Sahnesauce (125ct)        |
+| 21  | 4. Ofenkartoffel mit Sour Cream (75ct)                                | 29. Kartoffelauflauf mit Spinat und Sour Cream (125ct)                |
+| 22  | 5. Pasta mit Pilzen in Sahnesauce (125ct)                             | 18. Pilzpfanne Stroganoff Art mit Pasta und Sahnesauce (125ct)        |
+| 23  | 4. Ofenkartoffel mit Sour Cream (75ct)                                | 29. Kartoffelauflauf mit Spinat und Sour Cream (125ct)                |
+| 24  | 5. Pasta mit Pilzen in Sahnesauce (125ct)                             | 18. Pilzpfanne Stroganoff Art mit Pasta und Sahnesauce (125ct)        |
+| 25  | 4. Ofenkartoffel mit Sour Cream (75ct)                                | 29. Kartoffelauflauf mit Spinat und Sour Cream (125ct)                |
+| 26  | 5. Pasta mit Pilzen in Sahnesauce (125ct)                             | 18. Pilzpfanne Stroganoff Art mit Pasta und Sahnesauce (125ct)        |
+| 27  | 4. Ofenkartoffel mit Sour Cream (75ct)                                | 29. Kartoffelauflauf mit Spinat und Sour Cream (125ct)                |
+| 28  | 5. Pasta mit Pilzen in Sahnesauce (125ct)                             | 18. Pilzpfanne Stroganoff Art mit Pasta und Sahnesauce (125ct)        |
+| 29  | 4. Ofenkartoffel mit Sour Cream (75ct)                                | 29. Kartoffelauflauf mit Spinat und Sour Cream (125ct)                |
+| 30  | 5. Pasta mit Pilzen in Sahnesauce (125ct)                             | 18. Pilzpfanne Stroganoff Art mit Pasta und Sahnesauce (125ct)        |
++-----+-----------------------------------------------------------------------+-----------------------------------------------------------------------+
+"score":"0hard/-6765soft"
+Die reine Erweiterung der Kostenminimierung, führt zu einer Überoptimierung. Da das Einsparen der Kosten
+mehr gewichtet als die Kundenzufriedenheit ist. Erstellt der Solver einen MensaPlan nur aus Nudeln und Katoffeln
+Proteingerichte sind extreme Kosten verursacher. Wenn man das Verhältnis der Gewichtung zwischen Kundenzufriedenheit
+und Kostenminimierung ausbalnciert kommt es zu diesem Plan.
+
+Der Solver versucht die Logik umzugehen in dem er trotz Anpassung der Gewichtung bestimmte Gerichte für
+Tag 1 und 2 anzubieten und diese dann auf die anderen Tagen zu wiederholen.
+
++-----+----------------------------------------------------------------------------+----------------------------------------------------------------------------+
+| Tag | Mahlzeit 1 (Mittag)                                                        | Mahlzeit 2 (Abend)                                                         |
++-----+----------------------------------------------------------------------------+----------------------------------------------------------------------------+
+| 01  | 4. Ofenkartoffel mit Sour Cream (75ct)                                     | 29. Kartoffelauflauf mit Spinat und Sour Cream (125ct)                     |
+| 02  | 5. Pasta mit Pilzen in Sahnesauce (125ct)                                  | 18. Pilzpfanne Stroganoff Art mit Pasta und Sahnesauce (125ct)             |
+| 03  | 25. Kartoffelpfanne mit Brokkoli und Pfeffersauce (125ct)                  | 30. Schweineschnitzel mit Bratkartoffeln und Pfeffersauce (225ct)          |
+| 04  | 6. Reisbowl mit Tofu, Spinat und Sour Cream (275ct)                        | 23. Curryeintopf mit Tofu, Spinat und Brokkoli (250ct)                     |
+| 05  | 26. Pasta Primavera mit Zucchini, Tomaten, Zwiebeln und Sahnesauce (225ct) | 14. Nudelauflauf mit Hähnchen, Tomaten und Tomatensauce (275ct)            |
+| 06  | 24. Bohnenchili mit Tomaten, Zucchini und Reisbeilage (220ct)              | 17. Bohneneintopf mit Zucchini und Tomaten mit Reiseinlage (220ct)         |
+| 07  | 13. Pasta mit Bohnen, Zwiebeln und Pfeffersauce (175ct)                    | 22. Tomatiger Fischeintopf mit Tomaten und Bohnen (250ct)                  |
+| 08  | 16. Kartoffelsuppe mit Zwiebeln und Fleischersatzeinlage (270ct)           | 9. Reispfanne mit Brokkoli, Bohnen und Tomatensauce (175ct)                |
+| 09  | 19. Hähnchen Stroganoff Art mit Pilzen, Pasta und Sahnesauce (275ct)       | 31. Gebratener Tofu mit Pilzen auf Nudeln mit Sahnesauce (275ct)           |
+| 10  | 10. Kartoffelauflauf mexikanisch mit Schwein (280ct)                       | 21. Kartoffelreibekuchen mit Zucchini und Zwiebeln (170ct)                 |
+| 11  | 3. Tofu-Zucchini Curry im Reisrand (270ct)                                 | 28. Pilzrisotto mit Fleischersatz (270ct)                                  |
+| 12  | 7. Pasta mit Zucchini, Tomaten und Pfeffersauce (175ct)                    | 1. Pasta mit Hähnchen und Spinat in Sahnesauce (275ct)                     |
+| 13  | 4. Ofenkartoffel mit Sour Cream (75ct)                                     | 29. Kartoffelauflauf mit Spinat und Sour Cream (125ct)                     |
+| 14  | 18. Pilzpfanne Stroganoff Art mit Pasta und Sahnesauce (125ct)             | 5. Pasta mit Pilzen in Sahnesauce (125ct)                                  |
+| 15  | 30. Schweineschnitzel mit Bratkartoffeln und Pfeffersauce (225ct)          | 25. Kartoffelpfanne mit Brokkoli und Pfeffersauce (125ct)                  |
+| 16  | 23. Curryeintopf mit Tofu, Spinat und Brokkoli (250ct)                     | 6. Reisbowl mit Tofu, Spinat und Sour Cream (275ct)                        |
+| 17  | 26. Pasta Primavera mit Zucchini, Tomaten, Zwiebeln und Sahnesauce (225ct) | 8. Gefüllte Kartoffel mit Hähnchen, Zwiebeln und Sahnesauce (275ct)        |
+| 18  | 17. Bohneneintopf mit Zucchini und Tomaten mit Reiseinlage (220ct)         | 24. Bohnenchili mit Tomaten, Zucchini und Reisbeilage (220ct)              |
+| 19  | 27. Hähncheneintopf mit Bohnen, Tomaten und Nudeleinlage (320ct)           | 13. Pasta mit Bohnen, Zwiebeln und Pfeffersauce (175ct)                    |
+| 20  | 9. Reispfanne mit Brokkoli, Bohnen und Tomatensauce (175ct)                | 22. Tomatiger Fischeintopf mit Tomaten und Bohnen (250ct)                  |
+| 21  | 19. Hähnchen Stroganoff Art mit Pilzen, Pasta und Sahnesauce (275ct)       | 31. Gebratener Tofu mit Pilzen auf Nudeln mit Sahnesauce (275ct)           |
+| 22  | 2. Bratreis mit Schwein, Brokkoli und Pfeffersauce (275ct)                 | 28. Pilzrisotto mit Fleischersatz (270ct)                                  |
+| 23  | 14. Nudelauflauf mit Hähnchen, Tomaten und Tomatensauce (275ct)            | 7. Pasta mit Zucchini, Tomaten und Pfeffersauce (175ct)                    |
+| 24  | 21. Kartoffelreibekuchen mit Zucchini und Zwiebeln (170ct)                 | 16. Kartoffelsuppe mit Zwiebeln und Fleischersatzeinlage (270ct)           |
+| 25  | 18. Pilzpfanne Stroganoff Art mit Pasta und Sahnesauce (125ct)             | 5. Pasta mit Pilzen in Sahnesauce (125ct)                                  |
+| 26  | 25. Kartoffelpfanne mit Brokkoli und Pfeffersauce (125ct)                  | 30. Schweineschnitzel mit Bratkartoffeln und Pfeffersauce (225ct)          |
+| 27  | 20. Reispfanne mit Hähnchen, Brokkoli und Pfeffersauce (275ct)             | 3. Tofu-Zucchini Curry im Reisrand (270ct)                                 |
+| 28  | 4. Ofenkartoffel mit Sour Cream (75ct)                                     | 29. Kartoffelauflauf mit Spinat und Sour Cream (125ct)                     |
+| 29  | 24. Bohnenchili mit Tomaten, Zucchini und Reisbeilage (220ct)              | 17. Bohneneintopf mit Zucchini und Tomaten mit Reiseinlage (220ct)         |
+| 30  | 26. Pasta Primavera mit Zucchini, Tomaten, Zwiebeln und Sahnesauce (225ct) | 13. Pasta mit Bohnen, Zwiebeln und Pfeffersauce (175ct)                    |
++-----+----------------------------------------------------------------------------+----------------------------------------------------------------------------+
+
+
