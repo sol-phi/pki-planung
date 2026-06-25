@@ -1,31 +1,14 @@
 package org.acme.MenuPlanning.domain;
 
-public enum Ingredient {
-    // Kohlenhydrate
-    PASTA(IngredientType.KOHLENHYDRAT),
-    KARTOFFELN(IngredientType.KOHLENHYDRAT),
-    REIS(IngredientType.KOHLENHYDRAT),
-    // Proteine
-    HAEHNCHEN(IngredientType.PROTEIN),
-    SCHWEIN(IngredientType.PROTEIN),
-    FISCH(IngredientType.PROTEIN),
-    TOFU(IngredientType.PROTEIN),
-    FLEISCHERSATZ(IngredientType.PROTEIN),
-    // Gemüse
-    ZWIEBELN(IngredientType.GEMUESE),
-    BOHNEN(IngredientType.GEMUESE),
-    SPINAT(IngredientType.GEMUESE),
-    TOMATE(IngredientType.GEMUESE),
-    PILZE(IngredientType.GEMUESE),
-    ZUCCHINI(IngredientType.GEMUESE),
-    BROKKOLI(IngredientType.GEMUESE),
-    // Saucen
-    SAHNESAUCE(IngredientType.SAUCE),
-    TOMATENSAUCE(IngredientType.SAUCE),
-    PFEFFERSAUCE(IngredientType.SAUCE),
-    SOUR_CREAM(IngredientType.SAUCE);
+public class Ingredient {
+    private String name;
+    private IngredientType type;
 
-    private final IngredientType type;
-    Ingredient(IngredientType type) { this.type = type; }
+    public Ingredient(String name, IngredientType type) {
+        this.name = name;
+        this.type = type;
+    }
+
+    public String getName() { return name; }
     public IngredientType getType() { return type; }
 }

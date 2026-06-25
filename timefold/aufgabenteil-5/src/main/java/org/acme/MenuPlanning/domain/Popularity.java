@@ -1,22 +1,20 @@
 package org.acme.MenuPlanning.domain;
 
-import java.util.List;
-import java.util.HashSet;
-import java.util.Set;
+public class Popularity {
 
-public enum Popularity {
-    UNPOPULAR(1.5),      // Materialkosten * 1.5
-    NEUTRAL(2.2),        // Materialkosten * 2.2
-    POPULAR(2.5),        // Materialkosten * 2.5
-    DESIRED(3.0);        // Materialkosten * 3.0
+    public static final Popularity UNPOPULAR = new Popularity("UNPOPULAR", 1.5);
+    public static final Popularity NEUTRAL = new Popularity("NEUTRAL", 2.2);
+    public static final Popularity POPULAR = new Popularity("POPULAR", 2.5);
+    public static final Popularity DESIRED = new Popularity("DESIRED", 3.0);
 
-    private final double priceFactor;
+    private String name;
+    private double priceFactor;
 
-    Popularity(double priceFactor) {
+    public Popularity(String name, double priceFactor) {
+        this.name = name;
         this.priceFactor = priceFactor;
     }
 
-    public double getPriceFactor() {
-        return priceFactor;
-    }
+    public String getName() { return name; }
+    public double getPriceFactor() { return priceFactor; }
 }

@@ -21,7 +21,6 @@ public class MenuPlanResource {
     @Path("/solve")
     @Produces(MediaType.APPLICATION_JSON)
     public MenuPlan solve() {
-        // 1. Die 30 Tage mit den 31 Gerichten generieren
         MenuPlan problem = demoDataGenerator.generateDemoData();
 
         try {
@@ -31,7 +30,7 @@ public class MenuPlanResource {
                     .run()
                     .getFinalBestSolution();
         } catch (Exception e) {
-            throw new RuntimeException("Fehler bei der Berechnung des Speiseplans", e);
+            throw new RuntimeException("Error calculating the meal plan", e);
         }
     }
 }

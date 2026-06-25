@@ -6,7 +6,7 @@ import java.util.Set;
 
 public class Meal {
     private String name;
-    private int mealNumber;  // 1-31 für Zuordnung der Beliebtheit
+    private int mealNumber;
     private List<Ingredient> ingredients;
     private Ingredient mainCarb;
     private Ingredient mainProtein;
@@ -22,82 +22,64 @@ public class Meal {
         this.mainProtein = mainProtein;
         this.ingredients = ingredients;
 
-        // Vegetarisch-Check: Kein tierisches Protein
+        // Vegetarian - check
         this.isVegetarian = isVegetarianProtein(mainProtein);
 
-        // Beliebtheit basierend auf Gericht-Nummer zuordnen
+        // Assign popularity based on menu number
         this.popularity = assignPopularity(mealNumber);
     }
 
-    /**
-     *
-     * Unbeliebt: 4, 5, 6, 10, 16, 22, 27, 29
-     * Beliebt: 1, 9, 14, 15, 20, 21, 24, 25
-     * Begehrt: 2, 12, 17, 26
-     * Neutral: Alle anderen
-     */
+
     private static Popularity assignPopularity(int mealNumber) {
-        // Begehrt
+
         if (mealNumber == 2 || mealNumber == 12 || mealNumber == 17 || mealNumber == 26) {
             return Popularity.DESIRED;
         }
 
-        // Beliebt
         if (mealNumber == 1 || mealNumber == 9 || mealNumber == 14 || mealNumber == 15 ||
                 mealNumber == 20 || mealNumber == 21 || mealNumber == 24 || mealNumber == 25) {
             return Popularity.POPULAR;
         }
 
-        // Unbeliebt
         if (mealNumber == 4 || mealNumber == 5 || mealNumber == 6 || mealNumber == 10 ||
                 mealNumber == 16 || mealNumber == 22 || mealNumber == 27 || mealNumber == 29) {
             return Popularity.UNPOPULAR;
         }
 
-        // Neutral
         return Popularity.NEUTRAL;
     }
 
 
-     // Prüft, ob ein Protein vegetarisch ist
-
+    // Checks if a protein is vegetarian
     private static boolean isVegetarianProtein(Ingredient protein) {
         if (protein == null) {
-            return true;  // Kein Protein = vegetarisch
+            return true;
         }
-        // Nur Tofu und Fleischersatz sind vegetarisch
-        return protein == Ingredient.TOFU || protein == Ingredient.FLEISCHERSATZ;
+        return "TOFU".equals(protein.getName()) || "FLEISCHERSATZ".equals(protein.getName());
     }
 
     /**
-     * Task 5b - Kostenberechnung
-     *
-     * - Kohlenhydrate: 20ct/Portion
-     * - Protein: 100ct/Portion (gilt auch für Fleischersatz)
-     * - Gemüse: 50ct/Portion (pro Zutat, aber nicht doppelt!)
-     * - Saucen: 5ct/Portion
-     *
+     * Task 5b - calculate cost
      */
     public int getCostInCents() {
         int cost = 0;
         Set<Ingredient> alreadyCounted = new HashSet<>();
 
-        // 1. Kohlenhydrate (20ct)
+        // Carbs - 20ct
         if (this.mainCarb != null) {
             cost += 20;
             alreadyCounted.add(this.mainCarb);
         }
 
-        // 2. Protein (100ct)
+        // Protein - 100ct
         if (this.mainProtein != null) {
             cost += 100;
             alreadyCounted.add(this.mainProtein);
         }
 
-        // 3. Gemüse und Saucen (aber nicht doppelt zählen!)
+        // Vegetables and sauces
         if (this.ingredients != null) {
             for (Ingredient ingredient : this.ingredients) {
-                // Überspringen, wenn schon als Haupt-Komponente gezählt
                 if (alreadyCounted.contains(ingredient)) {
                     continue;
                 }
@@ -109,19 +91,14 @@ public class Meal {
                 } else if (type == IngredientType.GEMUESE) {
                     cost += 50;
                 }
-
                 alreadyCounted.add(ingredient);
             }
         }
-
         return cost;
     }
 
     /**
-     * Task 5c - Verkaufspreis berechnen basierend auf Beliebtheit
-     *
-     * Formel: Materialkosten * PopularityFactor
-     *
+     * Task 5c - Calculate selling price based on popularity
      */
     public int getSalesPriceInCents() {
         int materialCost = getCostInCents();
@@ -130,14 +107,13 @@ public class Meal {
     }
 
     /**
-     * Task 5c - Gewinn berechnen
-     *
-     * Gewinn = Verkaufspreis - Materialkosten
-     *
+     * Task 5c - Calculate profit
      */
     public int getProfitInCents() {
         return getSalesPriceInCents() - getCostInCents();
     }
+
+
 
     // Getter & Setter
     public String getName() { return name; }

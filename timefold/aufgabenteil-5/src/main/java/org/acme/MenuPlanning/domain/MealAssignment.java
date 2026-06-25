@@ -11,25 +11,25 @@ public class MealAssignment {
     @PlanningId
     private Long id;
     private int day;
-    private int indexOfDay; // 1 = Gericht 1, 2 = Gericht 2
+    private int menuOption;
 
     @PlanningVariable(valueRangeProviderRefs = "mealRange")
     private Meal meal;
 
     public MealAssignment() {}
 
-    public MealAssignment(Long id, int day, int indexOfDay) {
+    public MealAssignment(Long id, int day, int menuOption) {
         this.id = id;
         this.day = day;
-        this.indexOfDay = indexOfDay;
+        this.menuOption = menuOption;
     }
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
     public int getDay() { return day; }
     public void setDay(int day) { this.day = day; }
-    public int getIndexOfDay() { return indexOfDay; }
-    public void setIndexOfDay(int indexOfDay) { this.indexOfDay = indexOfDay; }
+    public int getMenuOption() { return menuOption; }
+    public void setMenuOption(int menuOption) { this.menuOption = menuOption; }
     public Meal getMeal() { return meal; }
     public void setMeal(Meal meal) { this.meal = meal; }
 }
