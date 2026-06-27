@@ -1,8 +1,8 @@
 package org.acme.MenuPlanning.domain;
 
 public class Ingredient {
-    private String name;
-    private IngredientType type;
+    private final String name;
+    private final IngredientType type;
 
     public Ingredient(String name, IngredientType type) {
         this.name = name;

@@ -16,7 +16,7 @@ public class MenuConstraintProvider implements ConstraintProvider {
         return new Constraint[] {
                 // HARD constraints
                 atLeastOneVegetarianPerDay(constraintFactory),
-                differentMealsSameDay(constraintFactory),
+                noIdenticalMainComponentsSameDay(constraintFactory),
                 noIdenticalMainComponentsConsecutiveDays(constraintFactory),
 
                 // SOFT constraints
@@ -41,15 +41,28 @@ public class MenuConstraintProvider implements ConstraintProvider {
     }
 
     /**
-     * HARD: No same menus in one day
+     * HARD: No identical main components on the same day
      */
-    protected Constraint differentMealsSameDay(ConstraintFactory constraintFactory) {
+    protected Constraint noIdenticalMainComponentsSameDay(ConstraintFactory constraintFactory) {
         return constraintFactory.forEachUniquePair(MealAssignment.class,
+                        // Leaves only two unique assignments to compare, Menu 1 and Menu 2 on the same day.
                         Joiners.equal(MealAssignment::getDay))
-                .filter((a1, a2) -> a1.getMeal() != null && a2.getMeal() != null
-                        && a1.getMeal().equals(a2.getMeal()))
+                .filter((a1, a2) -> a1.getMeal() != null && a2.getMeal() != null)
+                .filter((a1, a2) -> {
+                    boolean sameCarbOnSameDay =
+                            a1.getMeal().getMainCarb() != null
+                                    && a2.getMeal().getMainCarb() != null
+                                    && a1.getMeal().getMainCarb().getName().equals(a2.getMeal().getMainCarb().getName());
+
+                    boolean sameProteinOnSameDay =
+                            a1.getMeal().getMainProtein() != null
+                                    && a2.getMeal().getMainProtein() != null
+                                    && a1.getMeal().getMainProtein().getName().equals(a2.getMeal().getMainProtein().getName());
+
+                    return sameCarbOnSameDay || sameProteinOnSameDay;
+                })
                 .penalize(HardSoftScore.ONE_HARD)
-                .asConstraint("Two identical meals in one day");
+                .asConstraint("Identical main components on same day");
     }
 
     /**
@@ -61,12 +74,14 @@ public class MenuConstraintProvider implements ConstraintProvider {
                 .filter((a1, a2) -> a1.getMeal() != null && a2.getMeal() != null)
                 .filter((a1, a2) -> {
                     boolean sameCarbOnConsecutiveDays =
-                            a1.getMeal().getMainCarb() != null
-                                    && a1.getMeal().getMainCarb().equals(a2.getMeal().getMainCarb());
+                                a1.getMeal().getMainCarb() != null
+                                && a2.getMeal().getMainCarb() != null
+                                && a1.getMeal().getMainCarb().getName().equals(a2.getMeal().getMainCarb().getName());
 
                     boolean sameProteinOnConsecutiveDays =
-                            a1.getMeal().getMainProtein() != null
-                                    && a1.getMeal().getMainProtein().equals(a2.getMeal().getMainProtein());
+                                a1.getMeal().getMainProtein() != null
+                                && a2.getMeal().getMainProtein() != null
+                                && a1.getMeal().getMainProtein().getName().equals(a2.getMeal().getMainProtein().getName());
 
                     return sameCarbOnConsecutiveDays || sameProteinOnConsecutiveDays;
                 })
@@ -78,6 +93,7 @@ public class MenuConstraintProvider implements ConstraintProvider {
      * SOFT: Limiting the maximum number per meal over 30 days
      */
     protected Constraint limitMealFrequency(ConstraintFactory constraintFactory) {
+        // 60 slots / 31 meals ~= 1.93
         int maxOccurrencesPerMonth = 2;
 
         return constraintFactory.forEach(MealAssignment.class)

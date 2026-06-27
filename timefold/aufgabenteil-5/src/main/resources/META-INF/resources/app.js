@@ -98,7 +98,7 @@ function renderMealCard(meal) {
             <div class="fw-bold text-dark" style="font-size: 1.05rem;">${meal.name}</div>
             <div class="mt-1">
                 ${vegBadge}
-                <span class="badge bg-light text-dark border ms-1">No. ${meal.mealNumber}</span>
+                <span class="badge bg-light text-dark border ms-1">No. ${meal.mealIndex}</span>
             </div>
         </div>
     `;
