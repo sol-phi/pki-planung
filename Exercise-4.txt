@@ -37,3 +37,13 @@ It does not return a solution path, making it ideal for problems where the path 
 The inherent differences in the planners' approaches can be noticed in the context of the returned solutions as well.
 PDDL either finds a plan that fulfills all constraints perfectly, or it does not find a plan at all.
 Timefold always returns a plan, even with penalties aka imperfections.
+
+
+
+Sehr guter Vergleich. Vllt kleine Ergänzugen:
+
+1- PDDL sucht eine Kette von Handlungen, die nacheinander passieren müssen, Timefold hingegen eine optimale Verteilung.
+   Der Weg dahin ist unwichtig.
+
+2- Bei Riesige Datenmengen verfängt sich PDDL in seinem Entscheidungsbaum. Der Planer stürzt entweder ab oder rechnet lange.
+   Timefold verbessert ständig seine aktuelle Lösung schrittweise. Daher funktioniert besser bei große Datenmenge.

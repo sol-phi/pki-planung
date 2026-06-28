@@ -1,0 +1,95 @@
+A)
+The menu planning requirements were implemented in accordance with the task description.
+The schedule must contain at least one vegetarian option daily, must not feature identical main components
+on consecutive days, and should achieve a high level of shared ingredients for maximum efficiency.
+This was accomplished by implementing the constraints atLeastOneVegetarianPerDay,
+noIdenticalMainComponentsConsecutiveDays, and maximizeSharedIngredientsSameDay. Initially, the planner exhibited
+a noticeable behavior: it generated a schedule where both menu options on the same day were identical.
+Furthermore, variety was heavily restricted because the algorithm focused on only a few dishes to perfectly
+satisfy the rule regarding shared ingredients.
+
+To counteract this behavior, the noIdenticalMainComponentsSameDay constraint was introduced, preventing the
+exact same dish from being offered twice on the same day. However, because the planner lacked a strict prohibition
+on repetitions across the entire scheduling period, it chose the easiest mathematical path: it selected four
+specific dishes and rotated them alternately over the 30 days. Since the algorithm does not inherently
+recognize monotony, two constraints were implemented on both a micro and macro level. The antiMonotony constraint
+blocks dishes for a defined number of days after their use, preventing short-term repetitions and rigid patterns.
+On the macro level, limitMealFrequency regulates the maximum appearance of any single dish per month to stop the
+formation of repetitive blocks. The interplay between these two constraints is essential; otherwise, the planner
+would either create blocks or attempt to fulfill the required frequency of a dish as quickly as possible in
+immediate succession.
+
+B)
+When extending the program to incorporate cost minimization, the solver's behavior changes. Activating
+minimizeCosts increases the number of vegetarian dishes from 36 to 39 per month. The planner replaces
+protein-heavy dishes with meatless alternatives, as meat and fish components drive up ingredient costs.
+Additionally, the relatively expensive dish 11 is completely eliminated from the schedule. The number of pure
+veggie days (where both options are vegetarian) increases from 6 to 9 days. Without the strict boundaries of
+antiMonotony and limitMealFrequency, the number of vegetarian meals would jump to 45, and the remaining protein
+options would consist solely of dish 22, as it represents the cheapest protein component. However, such an
+outcome contradicts the goal of providing a diverse and appealing menu variety.
+
+C)
+Transitioning the model to profit maximization reveals an opposite trend: the number of pure veggie days drops
+back to 6 days. Furthermore, higher-cost dishes—such as the previously eliminated dish 11—are reintroduced to
+the schedule. An interesting phenomenon occurs with the unpopular dish 22, which is selected a total of 7 times
+despite its low price multiplier. Because the dish has high baseline material costs due to its fish component,
+it generates a higher absolute profit margin in cents than a cheaper vegetarian dish in a higher popularity tier.
+Consequently, the solver utilizes dish 22 as a highly efficient option for generating profit and protein.
+
+
+The weighting of the soft constraints establishes a mathematical hierarchy that defines which rule violations are
+penalized more severely than others. For the solver's functionality, the absolute numerical values are secondary;
+the critical factor is the relative ratio between the levels. The penalty for a higher-level rule must always be
+set high enough so that it cannot be bypassed by the accumulated violations of multiple lower-level rules.
+Mathematically, this prioritization could be accurately represented using a different scale. As long as the
+hierarchical order remains intact, the algorithm is guaranteed to process the constraints strictly according
+to their predefined priority, never sacrificing a core structural rule for minor optimizations at the cent level.
+
+
+
+
+Deutsch:
+
+A)
+Die Anforderungen an die Menüplanung wurden gemäß der Aufgabenstellung umgesetzt. Der Speiseplan muss täglich
+mindestens eine vegetarische Option enthalten, darf keine identischen Hauptkomponenten an aufeinanderfolgenden
+Tagen aufweisen und soll eine hohe Zutatenübereinstimmung zur Effizienzsteigerung bieten. Dies wurde durch die
+Implementierung der Constraints atLeastOneVegetarianPerDay, noIdenticalMainComponentsConsecutiveDays und
+maximizeSharedIngredientsSameDay realisiert. Hierbei zeigte der Planer zunächst ein auffälliges Verhalten: Er
+erstellte einen Plan, bei dem die Gerichte beider Menüoptionen am selben Tag identisch waren. Zudem wurde die
+Vielfalt stark eingeschränkt, da der Algorithmus sich auf wenige Gerichte fokussierte, um die Regel der
+identischen Zutaten optimal zu erfüllen.
+
+Um diesem Verhalten entgegenzuwirken, wurde das Constraint noIdenticalMainComponentsSameDay eingeführt.
+Dies verhindert, dass das exakt gleiche Gericht am selben Tag doppelt angeboten wird. Da dem Planer jedoch kein
+striktes Verbot für Wiederholungen über den gesamten Zeitraum auferlegt wurde, wählte er die einfachste
+mathematische Lösung: Er beschränkte sich auf vier spezifische Gerichte und rotierte diese über die 30 Tage
+hinweg. Da der Algorithmus von sich aus keine Monotonie erkennt, wurden zwei Constraints auf Mikro- und
+Makro-Ebene implementiert. Das Constraint antiMonotony blockiert Gerichte nach ihrem Einsatz für eine definierte
+Anzahl von Tagen. Dies unterbindet kurzfristige Wiederholungen und starre Muster im Speiseplan. Auf der
+Makro-Ebene regelt limitMealFrequency die maximale Anzahl der Einsätze eines Gerichts pro Monat, um die Entstehung
+von Monotonie-Blöcken zu verhindern. Das Zusammenspiel dieser beiden Constraints ist essenziell, da der Planer
+andernfalls entweder Blöcke bildet oder versucht, die Pflichteinsätze eines Gerichts so schnell wie möglich
+hintereinander abzuarbeiten.
+
+B)
+Wird das Programm um den Aspekt der Kostenminimierung erweitert, verändert sich das Verhalten des Solvers.
+Durch die Implementierung von minimizeCosts steigt die Anzahl der vegetarischen Gerichte im Monat von 36 auf 39.
+Der Planer ersetzt proteinhaltige Gerichte durch fleischlose Alternativen, da Fleisch- und Fischkomponenten
+die Wareneinsatzkosten erhöhen. Zudem wird das vergleichsweise teure Gericht 11 vollständig aus dem Plan gestrichen. Die Anzahl der reinen Veggie-Tage (an denen beide Menüoptionen vegetarisch sind) erhöht sich von 6 auf 9 Tage. Ohne die restriktiven Einschränkungen durch antiMonotony und limitMealFrequency würde die Anzahl der vegetarischen Mahlzeiten sogar auf 45 steigen; die verbleibenden Proteingerichte würden sich ausschließlich auf Gericht 22 beschränken, da dieses die günstigste Proteinkomponente darstellt. Ein solches Ergebnis widerspricht jedoch dem Ziel einer ausgewogenen und abwechslungsreichen Menüplanung.
+
+C)
+Bei der Erweiterung auf das Ziel der Gewinnmaximierung lässt sich eine gegenteilige Entwicklung beobachten:
+Die Anzahl der reinen Veggie-Tage sinkt wieder auf 6 Tage. Zudem werden kostenintensivere Gerichte – wie das zuvor
+eliminierte Gericht 11 – wieder in den Plan aufgenommen. Ein interessantes Phänomen zeigt sich beim unbeliebten
+Gericht 22, welches trotz seines niedrigen Preismultiplikators insgesamt 7-mal eingeplant wird. Da das Gericht
+durch die Fischkomponente hohe Basis-Materialkosten aufweist, generiert es in absoluten Zahlen einen höheren
+Deckungsbeitrag in Cent als ein günstiges vegetarisches Gericht in einer höheren Beliebtheitsstufe.
+Der Solver nutzt Gericht 22 somit als hocheffiziente Option zur Gewinn- und Proteingenerierung.
+
+Die Gewichtung der Soft-Constraints stellt eine mathematische Hierarchie dar, die festlegt, welche Regelverletzungen
+schwerer wiegen als andere. Für die Funktionsweise des Solvers sind die absoluten Zahlenwerte sekundär;
+entscheidend ist das relative Verhältnis der Stufen zueinander. Die Strafpunkte für eine übergeordnete Regel
+muss so hoch angesetzt werden, dass sie nicht durch die Summe mehrerer Verstöße auf untergeordneten Ebenen
+ausgehebelt werden können. Mathematisch ließe sich diese Priorisierung auch mit einer anderen Skalierung abbilden. Solange die hierarchische Ordnung intakt bleibt, arbeitet der Algorithmus die Constraints streng nach ihrer vordefinierten Priorität ab und opfert niemals eine Kernregel für geringfügige Optimierungen auf der Cent-Ebene.

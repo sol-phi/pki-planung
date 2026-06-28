@@ -20,7 +20,7 @@ public class MenuConstraintProvider implements ConstraintProvider {
                 noIdenticalMainComponentsConsecutiveDays(constraintFactory),
 
                 // SOFT constraints
-                limitMealFrequency(constraintFactory), // Moved here because it returns a soft score
+                limitMealFrequency(constraintFactory),
                 maximizeSharedIngredientsSameDay(constraintFactory),
                 antiMonotony(constraintFactory),
                 minimizeCosts(constraintFactory),
