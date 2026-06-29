@@ -33,10 +33,9 @@ C)
 Transitioning the model to profit maximization reveals an opposite trend: the number of pure veggie days drops
 back to 6 days. Furthermore, higher-cost dishes — such as the previously eliminated dish 11 — are reintroduced to
 the schedule. An interesting phenomenon occurs with the unpopular dish 22, which is selected a total of 7 times
-despite its low price multiplier. Because the dish has high baseline material costs due to its fish component,
-it generates a higher absolute profit margin in cents than a cheaper vegetarian dish in a higher popularity tier.
-Consequently, the solver utilizes dish 22 as a highly efficient option for generating profit and protein.
-
+despite its low price multiplier.Although this dish is unpopular, it is selected 7 times by the solver simply because
+it represents a highly cost-effective protein option. It allows the algorithm to satisfy the required protein variety
+efficiently without having to rely on more expensive meat-based dishes.
 
 The weighting of the soft constraints establishes a mathematical hierarchy that defines which rule violations are
 penalized more severely than others. For the solver's functionality, the absolute numerical values are secondary;
