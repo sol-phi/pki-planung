@@ -29,21 +29,16 @@ So, PDDL returns not just a solution but the path to reach the solution as well,
 
 Timefold on the other hand performs something known as "Heuristic Local Search Optimization".
 It starts by constructing an initial, but often incomplete or constraint-violating solution.
-Then, the solution is tweaked with a local search until every constraint is satisfied.
+Then, the solution is tweaked with a local search until it finds an optimal state where the constraints are satisfied as much as possible.
 Hard and soft constraints are represented using scores, one for each constraint type.
 Violating constraints drops and satisfying constraints increases the score. The score is then maximized.
 It does not return a solution path, making it ideal for problems where the path isn't relevant in the first place.
 
+When it comes to the scale of the initial problem state, the two approaches fare differently.
+For bigger planning projects PDDL is not ideal because the decision tree it uses internally grows exponentially with the problem state.
+This will result in a much longer runtime of the planner, and can also lead to crashes if the machine runs out of memory.
+On the other hand, Timefold does not have this problem because the heuristics and local search it uses are unaffected by the problem state's scale.
+
 The inherent differences in the planners' approaches can be noticed in the context of the returned solutions as well.
 PDDL either finds a plan that fulfills all constraints perfectly, or it does not find a plan at all.
 Timefold always returns a plan, even with penalties aka imperfections.
-
-
-
-Sehr guter Vergleich. Vllt kleine Ergänzugen:
-
-1- PDDL sucht eine Kette von Handlungen, die nacheinander passieren müssen, Timefold hingegen eine optimale Verteilung.
-   Der Weg dahin ist unwichtig.
-
-2- Bei Riesige Datenmengen verfängt sich PDDL in seinem Entscheidungsbaum. Der Planer stürzt entweder ab oder rechnet lange.
-   Timefold verbessert ständig seine aktuelle Lösung schrittweise. Daher funktioniert besser bei große Datenmenge.
